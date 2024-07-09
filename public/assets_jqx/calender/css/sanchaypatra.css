@@ -1,0 +1,374 @@
+/***********************************/
+/*** Created by Abdulla Al-Mamun ***/
+/***********************************/
+
+html {
+  margin-bottom: 1px;
+}
+
+form {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	line-height: 1.6em;
+	margin: 0px 0px 0px 0px;
+	font-size: 9pt;
+	color: #000000;
+	background-color:#ffffff;
+}
+
+#page_bg {
+	padding: 0px 0;
+	margin-bottom: 1px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	line-height: 1.6em;
+	margin: 0px 0px 0px 0px;
+	font-size: 9pt;
+	color: #000000;
+	background-color:#ffffff;
+}
+
+a:link {	
+	font-weight:bold;
+	text-decoration: none;
+	color: #0000FF;
+}
+
+a:visited {
+	text-decoration: none;
+	color:#505050;
+	font-weight: bold;
+}
+
+a:hover {
+	text-decoration: none;
+	font-weight: bold;
+	color:#f68a1f;
+}
+
+A.addLnk:link {
+color: #505050;
+text-decoration: none;
+font-size:7pt;
+font-weight:normal;
+font-family: Verdana;
+}
+
+
+A.addLnk:visited {
+color: #505050;
+text-decoration: none;
+font-size:7pt;
+font-weight:normal;
+font-family: Verdana;
+}
+
+A.addLnk:hover {
+color: #306698;
+text-decoration: underline;
+font-size:7pt;
+font-weight:normal;
+font-family: Verdana;
+}
+
+
+a.mmtvwlnk:link {
+	text-decoration: none;
+	color:#000000;
+	font-weight: normal;
+}
+
+a.mmtvwlnk:visited {
+	text-decoration: none;
+	color:#000000;
+	font-weight: normal;
+}
+
+a.mmtvwlnk:hover {
+	text-decoration: none;
+	color:#b41b3b;
+}
+
+
+
+p { margin-top: 0; margin-bottom: 5px; }
+
+img { border: 0 none; }
+
+A.creatNew:link {
+color:#990000;
+text-decoration: none;
+font-size:10pt;
+font-weight:bold
+}
+A.creatNew:visited {
+color: #FF0000;
+text-decoration: none;
+font-size:10pt;
+font-weight:bold
+}
+A.creatNew:active {
+color: #990000;
+text-decoration: none;
+font-size:10pt;
+font-weight:bold
+}
+A.creatNew:hover {
+color: #333333;
+text-decoration:underline;
+font-size:10pt;
+font-weight:bold
+}
+
+/*****************************************/
+/*** Div Related ***/
+/*****************************************/
+
+/*div.center {
+  text-align: center;
+}*/
+
+div#wrapper {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#header {
+	background: url(../images/hdr_bg.jpg) 0 0 repeat-x;
+}
+
+div#header_l {
+	position: relative;
+}
+
+div#header_r {
+	height: 90px;
+	padding-left: 370px;
+	padding-right: 30px;
+	padding-top: 0px;
+	overflow: hidden;
+	text-align: left;
+}
+
+#footer {
+	position:absolute 100%;
+	background: url(../images/ft_bg.jpg) 100% repeat-x;
+	width:100%;
+	float:left;
+}
+
+div#footer_l {
+	position: relative;
+}
+
+div#footer_r {
+	height: 50px;
+	overflow: hidden;
+	text-align: center;
+	padding-top:0px;
+	line-height: 1.3em;
+	font-size:11px;
+}
+
+/*div#footerbody {
+	position: absolute;
+	left: 0;
+	top: 0;
+	float: left;
+	width: 100%;
+	height: 90px;
+}*/
+
+div#logo {
+	position: absolute;
+	left: 0;
+	top: 0;
+	float: left;
+	width: 298px;
+	height: 75px;
+	background: url(../images/logo.png) 0 0 no-repeat;
+	margin-left: 0px;
+	margin-top: 5px;
+}
+
+div#clientlogo {
+	position: absolute;
+	right: 0;
+	top: 0;
+	float: right;
+	width: 120px;
+	height: 77px;
+	background: url(../images/logo-ebl.gif) 0 0 no-repeat;
+	/*background: url(../images/logo-client.gif) 0 0 no-repeat;*/
+	margin-right: 5px;
+	margin-top: 5px;
+}
+
+div#container {
+	/*min-width:1000px;
+	max-width:99.8%;*/
+	width: 100%;
+	/*border: solid 1px #e1f9fe;*/
+	
+	/*height:400px;*/
+	float:left;
+	
+	/*height: 85%;
+	width: 99.8%;
+	overflow-y:auto;*/
+}
+
+div#menuDiv {
+	background-color:#f2fcfe;
+	width:200px;
+	float:left;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:8pt;
+	font-style:normal;
+}
+
+div#body {
+	background-color:#ffffff;
+	width:auto;
+	float:right;
+}
+
+.divTitle{
+text-align:left;
+padding-left:15px;
+padding-bottom:5px;
+}
+
+.divPresentation {
+overflow:auto;
+max-height:290px; 
+text-align:left;
+}
+
+
+table#tblbody {
+	font-family:Verdana;
+	font-size:8pt;
+}
+
+.head {
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	font-size:8pt;
+	background-image:url(../images/table_back.png);
+	background-repeat:repeat-x repeat-y;
+	color:#000033;
+	vertical-align:top;
+	padding-bottom:3px;
+}
+
+.tdPad {
+	text-align:left;
+	
+	padding-left:5px;
+	vertical-align:middle;
+	line-height:10px;
+}
+
+input[type=text] { 
+border: 1px solid #a0a0a0; 
+font-family:Verdana;
+font-size:8pt;
+}
+
+input.text { 
+border: 1px solid #a0a0a0; 
+font-family:Verdana;
+font-size:8pt;
+}
+
+/*input.button { cursor: pointer; }*/
+input[type=submit] {
+background-color: #2188FF;
+color:#ffffff;
+border: 0px solid #2188FF;
+font-family:Verdana;
+font-weight:bold;
+font-size:8pt;
+height:17px;
+padding-left:5px;
+padding-right:5px;
+}
+
+input.submit {
+background-color: #2188FF;
+color:#ffffff;
+border: 0px solid #2188FF;
+font-family:Verdana;
+font-weight:bold;
+font-size:8pt;
+height:17px;
+padding-left:5px;
+padding-right:5px;
+}
+
+input[type=button] {
+background-color: #2188FF;
+color:#ffffff;
+border: 0px solid #2188FF;
+font-family:Verdana;
+font-weight:bold;
+font-size:8pt;
+height:17px;
+padding-left:5px;
+padding-right:5px;
+}
+
+input.button {
+background-color: #2188FF;
+color:#ffffff;
+border: 0px solid #2188FF;
+font-family:Verdana;
+font-weight:bold;
+font-size:8pt;
+height:17px;
+padding-left:5px;
+padding-right:5px;
+}
+
+input[type=select] {
+/*background-color: #2188FF;
+color:#ffffff;
+border: 0px solid #2188FF;
+font-family:Verdana;
+font-weight:bold;
+font-size:8pt;
+height:17px;
+padding-left:5px;
+padding-right:5px;*/
+height:17px;
+width:213px;
+font-family:Verdana;
+font-weight:bold;
+font-size:10px;
+border: 0px solid #2188FF;
+background-color: #2188FF;
+color:#ffffff;
+
+}
+
+input.select {
+height:17px;
+width:213px;
+font-family:Verdana;
+font-weight:bold;
+font-size:10px;
+border: 0px solid #2188FF;
+background-color: #2188FF;
+color:#ffffff;
+}
+/******************************************/
+/*************** Table End ****************/
+/******************************************/
+
+table.purc_entry td{
+text-align:left;
+}

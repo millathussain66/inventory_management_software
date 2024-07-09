@@ -1,0 +1,217 @@
+html {
+scrollbar-face-color: #D7E1FA;
+scrollbar-shadow-color: #EEF4FF;
+scrollbar-highlight-color: #EEF4FF;
+scrollbar-3dlight-color: #DEE8FF;
+scrollbar-darkshadow-color: #002147;
+scrollbar-track-color: #D9E9FF;
+scrollbar-arrow-color: #ffffff;
+}
+
+body {
+}
+
+A.mlink:link {
+color: #F9844B;
+text-decoration: none;
+font-size:10pt;
+font-weight:normal;
+font-family: Tahoma;
+}
+
+A.mlink:visited {
+color: #F9844B;
+text-decoration: none;
+font-size:10pt;
+font-weight:normal;
+font-family: Tahoma;
+}
+
+A.mlink:active {
+color: #F9844B;
+text-decoration: none;
+font-size:10pt;
+font-weight:normal;
+font-family: Tahoma;
+}
+
+A.mlink:hover {
+color: #F9844B;
+text-decoration: none;
+font-size:10pt;
+font-weight:normal;
+font-family: Tahoma;
+}
+
+A.lgout:link {
+color: #306698;
+text-decoration: none;
+font-size:10pt;
+font-weight:normal;
+font-family: Tahoma;
+}
+
+A.lgout:visited {
+color: #306698;
+text-decoration: none;
+font-size:10pt;
+font-weight:normal;
+font-family: Tahoma;
+}
+
+A.lgout:active {
+color: #306698;
+text-decoration: none;
+font-size:10pt;
+font-weight:normal;
+font-family: Tahoma;
+}
+
+A.lgout:hover {
+color: #306698;
+text-decoration: underline;
+font-size:10pt;
+font-weight:normal;
+font-family: Tahoma;
+}
+
+A.mnulink:link {
+color: #306698;
+text-decoration: none;
+font-size:8pt;
+font-weight:normal;
+font-family: Verdana;
+}
+
+A.mnulink:visited {
+color: #306698;
+text-decoration: none;
+font-size:8pt;
+font-weight:normal;
+font-family: Verdana;
+}
+
+A.mnulink:active {
+color: #306698;
+text-decoration: none;
+font-size:8pt;
+font-weight:normal;
+font-family: verdana;
+}
+
+A.mnulink:hover {
+color: #306698;
+text-decoration: underline;
+font-size:8pt;
+font-weight:normal;
+font-family: Verdana;
+}
+
+
+A.addLnk:link {
+color: #505050;
+text-decoration: none;
+font-size:7pt;
+font-weight:normal;
+font-family: Verdana;
+}
+
+A.addLnk:visited {
+color: #505050;
+text-decoration: none;
+font-size:7pt;
+font-weight:normal;
+font-family: Verdana;
+}
+
+A.addLnk:active {
+color: #505050;
+text-decoration: none;
+font-size:7pt;
+font-weight:normal;
+font-family: verdana;
+}
+
+A.addLnk:hover {
+color: #306698;
+text-decoration: underline;
+font-size:7pt;
+font-weight:normal;
+font-family: Verdana;
+}
+
+table.headerTitle{
+font-size:8pt;
+color:#oooooo;
+font-weight:bold;
+}
+table.headerTitle td{
+font-size:8pt;
+color:#oooooo;
+vertical-align:text-top;
+text-align:left
+}
+
+A.mmLnk:link {
+color: #306698;
+text-decoration: none;
+font-size:8pt;
+font-weight:normal;
+font-family: Verdana;
+}
+
+A.mmLnk:visited {
+color: #306698;
+text-decoration: none;
+font-size:8pt;
+font-weight:normal;
+font-family: Verdana;
+}
+
+A.mmLnk:active {
+color: #306698;
+text-decoration: none;
+font-size:8pt;
+font-weight:normal;
+font-family: verdana;
+}
+
+A.mmLnk:hover {
+color: #306698;
+text-decoration: underline;
+font-size:8pt;
+font-weight:normal;
+font-family: Verdana;
+}
+
+A.mmEdt:link {
+color: #BC0000;
+text-decoration: none;
+font-size:8pt;
+font-weight:normal;
+font-family: Verdana;
+}
+
+A.mmEdt:visited {
+color: #BC0000;
+text-decoration: none;
+font-size:8pt;
+font-weight:normal;
+font-family: Verdana;
+}
+
+A.mmEdt:active {
+color: #BC0000;
+text-decoration: none;
+font-size:8pt;
+font-weight:normal;
+font-family: verdana;
+}
+
+A.mmEdt:hover {
+color: #BC0000;
+text-decoration: underline;
+font-size:8pt;
+font-weight:normal;
+font-family: Verdana;
+}

@@ -1,0 +1,54 @@
+/*#sltCustomerId { margin-left: .5em; float: left; }*/
+/*#sltCustomerId, label { float: left; font-family: Arial, Helvetica, sans-serif; font-size: small; }*/
+/*#sltNatureId { margin-left: .5em; float: left; }
+#sltNatureId, label { float: left; font-family: Arial, Helvetica, sans-serif; font-size: small; }
+#sltAccountId { margin-left: .5em; float: left; }
+#sltAccountId, label { float: left; font-family: Arial, Helvetica, sans-serif; font-size: small; }
+#txtLimit { margin-left: .5em; float: left; }
+#txtLimit, label { float: left; font-family: Arial, Helvetica, sans-serif; font-size: small; }
+#txtSanctionDate { margin-left: .5em; float: left; }
+#txtSanctionDate, label { float: left; font-family: Arial, Helvetica, sans-serif; font-size: small; }
+#txtExpiryDate { margin-left: .5em; float: left; }
+#txtExpiryDate, label { float: left; font-family: Arial, Helvetica, sans-serif; font-size: small; }
+#txtFSV { margin-left: .5em; float: left; }
+#txtFSV, label { float: left; font-family: Arial, Helvetica, sans-serif; font-size: small; }*/
+/*br { clear: both; }*/
+input[type=text] { 
+border: 1px solid #a0a0a0; 
+font-family:Verdana;
+font-size:8pt;
+}
+
+input[type=password] { 
+border: 1px solid #a0a0a0; 
+font-family:Verdana;
+font-size:8pt;
+}
+
+input.error { border: 1px solid red;}
+label.error {
+	background: url('../images/design/unchecked.gif') no-repeat;
+	padding-left: 16px;
+	margin-left: .3em;
+}
+label.valid {
+	background: url('../images/design/checked.gif') no-repeat;
+	display: block;
+	width: 16px;
+	height: 16px;
+}
+
+input[type=submit] {
+background-color: #2188FF;
+color:#ffffff;
+border: 0px solid #2188FF;
+font-family:Verdana;
+font-weight:bold;
+font-size:8pt;
+height:17px;
+padding-left:5px;
+padding-right:5px;
+}
+
+
+
