@@ -7,6 +7,7 @@
     <meta name="description" content="POS - Bootstrap Admin Template">
     <meta name="author" content="Dreamguys - Bootstrap Admin Template">
     <meta name="robots" content="noindex, nofollow">
+    <meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
     <title>Dreams Pos Admin Template</title>
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('public/assets/img/favicon.png') }}">
     <link rel="stylesheet" href="{{ asset('public/assets/css/bootstrap.min.css') }}">
@@ -28,18 +29,12 @@
     <link rel="stylesheet" href="{{ asset('public/assets_jqx/jqwidgets/styles/jqx.energyblue.css') }}"
         type="text/css" />
     <link rel="stylesheet" href="{{ asset('public/assets_jqx/jqwidgets/styles/jqx.darkblue.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('public/assets_jqx/msg_popup/common.css') }}" type="text/css" />
-
 
     <script type="text/javascript" src="{{ asset('public/assets_jqx/jqwidgets/jqxcore.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/assets_jqx/jqwidgets/jqxexpander.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/assets_jqx/jqwidgets/jqxvalidator.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/assets_jqx/jqwidgets/jqxbuttons.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('public/assets_jqx/jqwidgets/jqxcheckbox.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/assets_jqx/jqwidgets/globalization/globalize.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('public/assets_jqx/jqwidgets/jqxcalendar.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('public/assets_jqx/jqwidgets/jqxdatetimeinput.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('public/assets_jqx/jqwidgets/jqxmaskedinput.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/assets_jqx/jqwidgets/jqxlistbox.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/assets_jqx/jqwidgets/jqxcombobox.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/assets_jqx/jqwidgets/jqxscrollbar.js') }}"></script>
@@ -71,6 +66,8 @@
     <script type="text/javascript" src="{{ asset('public/assets_jqx/jqwidgets/jqxform.js') }}"></script>
     <script type="text/javascript" src="{{ url('/') }}/public/assets_jqx/jqwidgets/jqxgrid.columnsreorder.js">
     </script>
+
+
 
 
 
@@ -141,16 +138,13 @@
                                 <div class="search-info">
                                     <h6><span><i data-feather="user" class="feather-16"></i></span>Customers</h6>
                                     <ul class="customers">
-                                        <li><a href="javascript:void(0);">Aron Varu<img
-                                                    src="{{ asset('public/assets/img/profiles/avator1.jpg') }}" alt
+                                        <li><a href="javascript:void(0);">Aron Varu<img src="" alt
                                                     class="img-fluid"></a>
                                         </li>
-                                        <li><a href="javascript:void(0);">Jonita<img
-                                                    src="{{ asset('public/assets/img/profiles/avatar-01.jpg') }}" alt
+                                        <li><a href="javascript:void(0);">Jonita<img src="" alt
                                                     class="img-fluid"></a>
                                         </li>
-                                        <li><a href="javascript:void(0);">Aaron<img
-                                                    src="{{ asset('public/assets/img/profiles/avatar-10.jpg') }}" alt
+                                        <li><a href="javascript:void(0);">Aaron<img src="" alt
                                                     class="img-fluid"></a>
                                         </li>
                                     </ul>
@@ -166,7 +160,7 @@
                         data-bs-toggle="dropdown">
                         <span class="user-info">
                             <span class="user-letter">
-                                <img src="{{ asset('public/assets/img/store/store-01.png') }}" alt="Store Logo"
+                                <img src="" alt="Store Logo"
                                     class="img-fluid">
                             </span>
                             <span class="user-detail">
@@ -176,20 +170,20 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a href="javascript:void(0);" class="dropdown-item">
-                            <img src="{{ asset('public/assets/img/store/store-01.png') }}" alt="Store Logo"
+                            <img src="" alt="Store Logo"
                                 class="img-fluid"> Grocery
                             Alpha
                         </a>
                         <a href="javascript:void(0);" class="dropdown-item">
-                            <img src="{{ asset('public/assets/img/store/store-02.png') }}" alt="Store Logo"
+                            <img src="" alt="Store Logo"
                                 class="img-fluid"> Grocery Apex
                         </a>
                         <a href="javascript:void(0);" class="dropdown-item">
-                            <img src="{{ asset('public/assets/img/store/store-03.png') }}" alt="Store Logo"
+                            <img src="" alt="Store Logo"
                                 class="img-fluid"> Grocery Bevy
                         </a>
                         <a href="javascript:void(0);" class="dropdown-item">
-                            <img src="{{ asset('public/assets/img/store/store-04.png') }}" alt="Store Logo"
+                            <img src="" alt="Store Logo"
                                 class="img-fluid"> Grocery Eden
                         </a>
                     </div>
@@ -199,20 +193,20 @@
                 <li class="nav-item dropdown has-arrow flag-nav nav-item-box">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="javascript:void(0);"
                         role="button">
-                        <img src="{{ asset('public/assets/img/flags/us.png') }}" alt="Language" class="img-fluid">
+                        <img src="" alt="Language" class="img-fluid">
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a href="javascript:void(0);" class="dropdown-item active">
-                            <img src="{{ asset('public/assets/img/flags/us.png') }}" alt height="16"> English
+                            <img src="" alt height="16"> English
                         </a>
                         <a href="javascript:void(0);" class="dropdown-item">
-                            <img src="{{ asset('public/assets/img/flags/fr.png') }}" alt height="16"> French
+                            <img src="" alt height="16"> French
                         </a>
                         <a href="javascript:void(0);" class="dropdown-item">
-                            <img src="{{ asset('public/assets/img/flags/es.png') }}" alt height="16"> Spanish
+                            <img src="" alt height="16"> Spanish
                         </a>
                         <a href="javascript:void(0);" class="dropdown-item">
-                            <img src="{{ asset('public/assets/img/flags/de.png') }}" alt height="16"> German
+                            <img src="" alt height="16"> German
                         </a>
                     </div>
                 </li>
@@ -244,8 +238,7 @@
                                     <a href="activities.html">
                                         <div class="media d-flex">
                                             <span class="avatar flex-shrink-0">
-                                                <img alt
-                                                    src="{{ asset('public/assets/img/profiles/avatar-02.jpg') }}">
+                                                <img alt src="">
                                             </span>
                                             <div class="media-body flex-grow-1">
                                                 <p class="noti-details"><span class="noti-title">John Doe</span> added
@@ -262,8 +255,7 @@
                                     <a href="activities.html">
                                         <div class="media d-flex">
                                             <span class="avatar flex-shrink-0">
-                                                <img alt
-                                                    src="{{ asset('public/assets/img/profiles/avatar-03.jpg') }}">
+                                                <img alt src="">
                                             </span>
                                             <div class="media-body flex-grow-1">
                                                 <p class="noti-details"><span class="noti-title">Tarah
@@ -280,8 +272,7 @@
                                     <a href="activities.html">
                                         <div class="media d-flex">
                                             <span class="avatar flex-shrink-0">
-                                                <img alt
-                                                    src="{{ asset('public/assets/img/profiles/avatar-06.jpg') }}">
+                                                <img alt src="">
                                             </span>
                                             <div class="media-body flex-grow-1">
                                                 <p class="noti-details"><span class="noti-title">Misty Tison</span>
@@ -298,8 +289,7 @@
                                     <a href="activities.html">
                                         <div class="media d-flex">
                                             <span class="avatar flex-shrink-0">
-                                                <img alt
-                                                    src="{{ asset('public/assets/img/profiles/avatar-17.jpg') }}">
+                                                <img alt src="">
                                             </span>
                                             <div class="media-body flex-grow-1">
                                                 <p class="noti-details"><span class="noti-title">Rolland Webber</span>
@@ -316,8 +306,7 @@
                                     <a href="activities.html">
                                         <div class="media d-flex">
                                             <span class="avatar flex-shrink-0">
-                                                <img alt
-                                                    src="{{ asset('public/assets/img/profiles/avatar-13.jpg') }}">
+                                                <img alt src="">
                                             </span>
                                             <div class="media-body flex-grow-1">
                                                 <p class="noti-details"><span class="noti-title">Bernardo
@@ -345,7 +334,7 @@
                     <a href="javascript:void(0);" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
                         <span class="user-info">
                             <span class="user-letter">
-                                <img src="{{ asset('public/assets/img/profiles/avator1.jpg') }}" alt
+                                <img src="" alt
                                     class="img-fluid">
                             </span>
                             <span class="user-detail">
@@ -358,7 +347,7 @@
                         <div class="profilename">
                             <div class="profileset">
                                 <span class="user-img"><img
-                                        src="{{ asset('public/assets/img/profiles/avator1.jpg') }}" alt>
+                                        src="" alt>
                                     <span class="status online"></span></span>
                                 <div class="profilesets">
                                     <h6>John Smilga</h6>
@@ -372,9 +361,8 @@
                             <a class="dropdown-item" href="general-settings.html"><i class="me-2"
                                     data-feather="settings"></i>Settings</a>
                             <hr class="m-0">
-                            <a class="dropdown-item logout pb-0" href="signin.html"><img
-                                    src="{{ asset('public/assets/img/icons/log-out.svg') }}" class="me-2"
-                                    alt="img">Logout</a>
+                            <a class="dropdown-item logout pb-0" href="signin.html"><img src=""
+                                    class="me-2" alt="img">Logout</a>
                         </div>
                     </div>
                 </li>
@@ -899,33 +887,10 @@
                             </ul>
                         </li>
                         <li class="submenu-open">
-                            <h6 class="submenu-hdr">Help</h6>
+                            <h6 class="submenu-hdr">Parameter Setup</h6>
                             <ul>
-                                <li><a href="javascript:void(0);"><i
-                                            data-feather="file-text"></i><span>Documentation</span></a></li>
-                                <li><a href="javascript:void(0);"><i data-feather="lock"></i><span>Changelog
-                                            v2.0.7</span></a></li>
-                                <li class="submenu">
-                                    <a href="javascript:void(0);"><i data-feather="file-minus"></i><span>Multi
-                                            Level</span><span class="menu-arrow"></span></a>
-                                    <ul>
-                                        <li><a href="javascript:void(0);">Level 1.1</a></li>
-                                        <li class="submenu submenu-two"><a href="javascript:void(0);">Level 1.2<span
-                                                    class="menu-arrow inside-submenu"></span></a>
-                                            <ul>
-                                                <li><a href="javascript:void(0);">Level 2.1</a></li>
-                                                <li class="submenu submenu-two submenu-three"><a
-                                                        href="javascript:void(0);">Level 2.2<span
-                                                            class="menu-arrow inside-submenu inside-submenu-two"></span></a>
-                                                    <ul>
-                                                        <li><a href="javascript:void(0);">Level 3.1</a></li>
-                                                        <li><a href="javascript:void(0);">Level 3.2</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
+                                <li><a href="{{ route('parameter.view') }}"><i
+                                            data-feather="file-text"></i><span>Parameter</span></a></li>
                             </ul>
                         </li>
                     </ul>
@@ -942,43 +907,43 @@
                             <li class="nav-item" role="presentation">
                                 <a class="tablinks nav-link" href="#home" id="home-tab" data-bs-toggle="tab"
                                     data-bs-target="#home" role="tab" aria-selected="true">
-                                    <img src="{{ asset('public/assets/img/icons/menu-icon.svg') }}" alt>
+                                    <img src="" alt>
                                 </a>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <a class="tablinks nav-link" href="#messages" id="messages-tab" data-bs-toggle="tab"
                                     data-bs-target="#product" role="tab" aria-selected="false">
-                                    <img src="{{ asset('public/assets/img/icons/product.svg') }}" alt>
+                                    <img src="" alt>
                                 </a>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <a class="tablinks nav-link" href="#profile" id="profile-tab" data-bs-toggle="tab"
                                     data-bs-target="#sales" role="tab" aria-selected="false">
-                                    <img src="{{ asset('public/assets/img/icons/sales1.svg') }}" alt>
+                                    <img src="" alt>
                                 </a>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <a class="tablinks nav-link" href="#report" id="report-tab" data-bs-toggle="tab"
                                     data-bs-target="#purchase" role="tab" aria-selected="true">
-                                    <img src="{{ asset('public/assets/img/icons/purchase1.svg') }}" alt>
+                                    <img src="" alt>
                                 </a>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <a class="tablinks nav-link" href="#set" id="set-tab" data-bs-toggle="tab"
                                     data-bs-target="#user" role="tab" aria-selected="true">
-                                    <img src="{{ asset('public/assets/img/icons/users1.svg') }}" alt>
+                                    <img src="{" alt>
                                 </a>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <a class="tablinks nav-link" href="#set2" id="set-tab2" data-bs-toggle="tab"
                                     data-bs-target="#employee" role="tab" aria-selected="true">
-                                    <img src="{{ asset('public/assets/img/icons/calendars.svg') }}" alt>
+                                    <img src="" alt>
                                 </a>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <a class="tablinks nav-link" href="#set3" id="set-tab3" data-bs-toggle="tab"
                                     data-bs-target="#report" role="tab" aria-selected="true">
-                                    <img src="{{ asset('public/assets/img/icons/printer.svg') }}" alt>
+                                    <img src="" alt>
                                 </a>
                             </li>
                             <li class="nav-item" role="presentation">
@@ -1459,8 +1424,8 @@
                         </ul>
                     </li>
                     <li class="submenu">
-                        <a href="javascript:void(0);"><img src="{{ asset('public/assets/img/icons/product.svg') }}"
-                                alt="img"><span> Inventory </span> <span class="menu-arrow"></span></a>
+                        <a href="javascript:void(0);"><img src="" alt="img"><span> Inventory </span>
+                            <span class="menu-arrow"></span></a>
                         <ul>
                             <li><a href="product-list.html"><span>Products</span></a></li>
                             <li><a href="add-product.html"><span>Create Product</span></a></li>
@@ -1477,10 +1442,8 @@
                         </ul>
                     </li>
                     <li class="submenu">
-                        <a href="javascript:void(0);"><img
-                                src="{{ asset('public/assets/img/icons/purchase1.svg') }}"
-                                alt="img"><span>Sales &amp; Purchase</span> <span
-                                class="menu-arrow"></span></a>
+                        <a href="javascript:void(0);"><img src="" alt="img"><span>Sales &amp;
+                                Purchase</span> <span class="menu-arrow"></span></a>
                         <ul>
                             <li class="submenu">
                                 <a href="javascript:void(0);"><span>Sales</span><span class="menu-arrow"></span></a>
@@ -1516,8 +1479,8 @@
                         </ul>
                     </li>
                     <li class="submenu">
-                        <a href="javascript:void(0);"><img src="{{ asset('public/assets/img/icons/users1.svg') }}"
-                                alt="img"><span>User Management</span> <span class="menu-arrow"></span></a>
+                        <a href="javascript:void(0);"><img src="" alt="img"><span>User
+                                Management</span> <span class="menu-arrow"></span></a>
                         <ul>
                             <li class="submenu">
                                 <a href="javascript:void(0);"><span>People</span><span
@@ -1787,8 +1750,8 @@
                         </ul>
                     </li>
                     <li class="submenu">
-                        <a href="javascript:void(0);"><img src="{{ asset('public/assets/img/icons/printer.svg') }}"
-                                alt="img"><span>Reports</span> <span class="menu-arrow"></span></a>
+                        <a href="javascript:void(0);"><img src="" alt="img"><span>Reports</span>
+                            <span class="menu-arrow"></span></a>
                         <ul>
                             <li><a href="sales-report.html"><span>Sales Report</span></a></li>
                             <li><a href="purchase-report.html"><span>Purchase report</span></a></li>
@@ -1803,8 +1766,7 @@
                         </ul>
                     </li>
                     <li class="submenu">
-                        <a href="javascript:void(0);"><img
-                                src="{{ asset('public/assets/img/icons/settings.svg') }}" alt="img"><span>
+                        <a href="javascript:void(0);"><img src="" alt="img"><span>
                                 Settings</span> <span class="menu-arrow"></span></a>
                         <ul>
                             <li class="submenu">
@@ -1929,6 +1891,22 @@
     <script src="{{ asset('public/assets/js/theme-script.js') }}"></script>
     <script src="{{ asset('public/assets/js/script.js') }}"></script>
     <script src="{{ asset('public/assets/js/rocket-loader.min.js') }}"></script>
+
 </body>
 
 </html>
+{{-- 
+Refarance Table List :
+
+
+Store Name :
+ Warehouse 
+ Category
+  Sub Category 
+   Sub Sub Category 
+   Brand
+   Unit
+    Selling Type 
+     Barcode Symbology 
+     Discount Type
+     Tax Type --}}
