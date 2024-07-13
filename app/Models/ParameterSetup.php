@@ -121,11 +121,6 @@ class ParameterSetup extends Model
             ->offset($offset)
             ->limit($limit);
         $q = $data->get();
-
-
-
-
-
         if (count($q)  > 0) {
             $objCount = $q->toArray();
             $result["TotalRows"] = $objCount[0]->total_row;
@@ -182,5 +177,13 @@ class ParameterSetup extends Model
             ->where('j0.table_schema', 'inventory_management_software')
             ->where('j0.table_name', $request->val)
             ->first();
+    }
+
+    public function table_attributes($request)
+    {
+        $DB_SELECT = "SELECT *
+                FROM information_schema.columns
+                WHERE table_schema = 'inventory_management_software' AND table_name = '$request->val'";
+        return DB::select($DB_SELECT);
     }
 }

@@ -55,10 +55,6 @@ class ParameterSetupController extends Controller
         );
         echo json_encode($data);
     }
-
-
-
-
     public function duplicate_check(Request $request)
     {
         $num_row = $this->ParameterSetup->duplicate_check($request);
@@ -131,6 +127,15 @@ class ParameterSetupController extends Controller
     public function get_edit_data(Request $request)
     {
         $num_row = $this->ParameterSetup->get_edit_data($request);
+        $var = [
+            "data" => $num_row,
+        ];
+        echo json_encode($var);
+    }
+
+    public function table_attributes(Request $request)
+    {
+        $num_row = $this->ParameterSetup->table_attributes($request);
         $var = [
             "data" => $num_row,
         ];

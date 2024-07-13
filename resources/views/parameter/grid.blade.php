@@ -104,7 +104,7 @@
                         width: 30,
                         cellsrenderer: function(row) {
                             editrow = row;
-                            var dataRecord = jQuery("#jqxgrid").jqxGrid('getrowdata', editrow);
+                            var dataRecord = $("#jqxgrid").jqxGrid('getrowdata', editrow);
                             return '<div style="text-align:center;  cursor:pointer" onclick="delete_table(\'' +
                                 dataRecord.TABLE_NAME +
                                 '\');" ><img width="20px" align="center" src="{{ url('/') }}/public/assets/action_icon/delete.png"></div>';
@@ -121,7 +121,7 @@
                         width: 30,
                         cellsrenderer: function(row) {
                             editrow = row;
-                            var dataRecord = jQuery("#jqxgrid").jqxGrid('getrowdata', editrow);
+                            var dataRecord = $("#jqxgrid").jqxGrid('getrowdata', editrow);
                             return '<div style="text-align:center;  cursor:pointer" onclick="edit_delete(\'' +
                                 dataRecord.TABLE_NAME +
                                 '\');" ><img width="20px" align="center" src="{{ url('/') }}/public/assets/action_icon/edit.png"></div>';
@@ -139,7 +139,7 @@
                         width: 90,
                         cellsrenderer: function(row) {
                             editrow = row;
-                            var dataRecord = jQuery("#jqxgrid").jqxGrid('getrowdata', editrow);
+                            var dataRecord = $("#jqxgrid").jqxGrid('getrowdata', editrow);
                             return '<div style="text-align:center;  cursor:pointer" onclick="add_column(\'' +
                                 dataRecord.TABLE_NAME +
                                 '\');" ><img width="20px" align="center" src="{{ url('/') }}/public/assets/action_icon/vertical.png"></div>';
@@ -156,7 +156,7 @@
                         width: 80,
                         cellsrenderer: function(row) {
                             editrow = row;
-                            var dataRecord = jQuery("#jqxgrid").jqxGrid('getrowdata', editrow);
+                            var dataRecord = $("#jqxgrid").jqxGrid('getrowdata', editrow);
                             return '<div style="text-align:center;  cursor:pointer" onclick="add_row(\'' +
                                 dataRecord.TABLE_NAME +
                                 '\');" ><img width="20px" align="center" src="{{ url('/') }}/public/assets/action_icon/database.png"></div>';
@@ -206,7 +206,7 @@
                 if (event.args.item == 0) {}
                 if (event.args.item == 1) {
                     clear_form();
-                    jQuery('#table_name_form').jqxValidator('hide');
+                    $('#table_name_form').jqxValidator('hide');
                     $("#jqxgrid").jqxGrid('updatebounddata');
                 }
             });
@@ -219,7 +219,7 @@
                 $("#dynamic_table_push").html(table_name);
                 $("#table_name_hidden").val(table_name);
             });
-            jQuery('#table_name_form').jqxValidator({
+            $('#table_name_form').jqxValidator({
                 hintType: 'label',
                 rules: [{
                         input: '#table_name',
@@ -262,7 +262,7 @@
                             } else {
                                 var hiddenValue = $("#table_name_hidden").val();
                                 var dup = 0;
-                                jQuery.ajax({
+                                $.ajax({
                                     type: "GET",
                                     cache: false,
                                     async: false,
@@ -275,7 +275,7 @@
                                         console.log("Server Error");
                                     },
                                     success: function(response) {
-                                        var json = jQuery.parseJSON(response);
+                                        var json = $.parseJSON(response);
                                         if (json.Status == 'ok') {
                                             dup = 0;
                                         } else {
@@ -339,20 +339,21 @@
                 }
                 $('#table_name_form').jqxValidator('validate', validationResult);
             });
-            jQuery("#add_column_window").jqxWindow({
+            $("#add_column_window").jqxWindow({
                 height: 700,
                 width: 1200,
                 isModal: true,
                 zIndex: 99999999999999999,
                 autoOpen: false,
-                cancelButton: jQuery('#cancelButton')
+                cancelButton: $('#cancelButton')
             });
         });
 
         function add_column(name) {
-            jQuery("#historyheaderTitle").html("Table Name: " + name);
-            jQuery("#add_column_window").jqxWindow('open');
-            jQuery.ajax({
+            $('#table_tuple_attributes').empty();
+            $("#historyheaderTitle").html("Table Name: " + name);
+            $("#add_column_window").jqxWindow('open');
+            $.ajax({
                 type: "GET",
                 cache: false,
                 async: false,
@@ -362,18 +363,85 @@
                 },
                 datatype: "json",
                 success: function(response) {
+                    var json = $.parseJSON(response);
 
+                    var i = 0;
+                    $('#table_attributes_length_count').val(json.data.length);
+                    $.each(json.data, function(key, value) {
+
+                        key++;
+
+                        var html_string = "";
+                        html_string += '<tr id="no_of_row_'+key+'">';
+                        html_string += '<td>';
+                        html_string += '<input type="hidden" id="delete_status_'+key+'" name="delete_status_'+key+'" value="0"> ';
+                        html_string += '<input type="text" id="column_name_' + key + '" name="column_name_' + key + '" value='+value.COLUMN_NAME+' class="form-control"></td>';
+                        html_string += '<td><select onchange="change_data_type('+ key +')" id="data_type_'+key+'" name="data_type_'+key+'" class="form-select">{!! $column_data_type_str !!}</select></td>';
+                        html_string += '<td><input type="number" id="column_length_' + key + '" name="column_length_' + key + '" value="' + (value.CHARACTER_MAXIMUM_LENGTH ?? '') + '" class="form-control">   <input type="text" id="enum_val_' + key + '" name="enum_val_' + key + '" value="' + (value.COLUMN_TYPE ?? '') + '" class="form-control"></td>';
+                        html_string += '<td><input type="text" id="column_default_value_' + key + '" name="column_default_value_' + key + '" value="' + (value.COLUMN_DEFAULT ?? '') + '" class="form-control"></td>';
+                        html_string += '<td><textarea rows="1" cols="10" id="column_comment_' + key + '" name="column_comment_' + key + '"  class="form-control" placeholder="Enter text here">'+value.COLUMN_COMMENT+'</textarea></td>';
+                        html_string += '<td style="text-align:center"><input type="checkbox" id="is_nullable_'+key+'" name="is_nullable_'+key+'" class="form-check-input"></td>';
+                        if(value.COLUMN_NAME=="id" && value.COLUMN_KEY == "PRI"){
+                            html_string += '<td></td>';
+                        }else{
+                            html_string += '<td><button onclick="delete_attribute('+ key +')" class="btn btn-sm btn-danger btn-wave waves-effect waves-light"><i class="feather-trash align-middle me-2 d-inline-block"></i>Delete</button></td>';
+
+                        }
+                        html_string += '</tr>';
+                        $('#table_tuple_attributes').append(html_string);
+                        $('#data_type_'+key+' option[value="'+value.DATA_TYPE+'"]').prop('selected', true);
+                        if(value.IS_NULLABLE == "YES") {
+                            $('#is_nullable_'+key).prop('checked', true); 
+                        } else {
+                            $('#is_nullable_'+key).prop('checked', false);
+                        }
+                        change_data_type(key);
+                    });
                 }
             });
         }
+        function add_more_attribute(){
 
+            var new_counter = $("#table_attributes_length_count").val();
+            var key = parseInt(new_counter) + 1;
+            var new_html_string = "";
+            new_html_string += '<tr id="no_of_row_'+key+'">';
+            new_html_string += '<td>';
+            new_html_string += '<input type="hidden" id="delete_status_'+key+'" name="delete_status_'+key+'" value="0"> ';
+            new_html_string += '<input type="text" id="column_name_' + key + '" name="column_name_' + key + '"  class="form-control"></td>';
+            new_html_string += '<td><select onchange="change_data_type('+ key +')" id="data_type_'+key+'" name="data_type_'+key+'" class="form-select">{!! $column_data_type_str !!}</select></td>';
+            new_html_string += '<td><input type="number" id="column_length_' + key + '" name="column_length_' + key + '"  class="form-control">   <input type="text" id="enum_val_' + key + '" name="enum_val_' + key + '" class="form-control"></td>';
+            new_html_string += '<td><input type="text" id="column_default_value_' + key + '" name="column_default_value_' + key + '"  class="form-control"></td>';
+            new_html_string += '<td><textarea rows="1" cols="10" id="column_comment_' + key + '" name="column_comment_' + key + '"  class="form-control" placeholder="Enter text here"></textarea></td>';
+            new_html_string += '<td style="text-align:center"><input type="checkbox" id="is_nullable_'+key+'" name="is_nullable_'+key+'" class="form-check-input"></td>';
+            new_html_string += '<td><button onclick="delete_attribute('+ key +')" class="btn btn-sm btn-danger btn-wave waves-effect waves-light"><i class="feather-trash align-middle me-2 d-inline-block"></i>Delete</button></td>';
+            new_html_string += '</tr>';
+            $('#no_of_row_' + new_counter).after(new_html_string);
+            $('#table_attributes_length_count').val(key);
+            change_data_type(key);
+        }
+
+
+        function delete_attribute(key){
+            $("#no_of_row_"+key).hide();
+            $("#delete_status_"+key).val(1);
+        }
+        function change_data_type (key){
+            var dataType = $("#data_type_"+key).val();
+            if(dataType=="enum"){
+                $("#column_length_"+key).hide();
+                $("#enum_val_"+key).show();
+            }else{
+                $("#enum_val_"+key).hide();
+                $("#column_length_"+key).show();
+            }
+        }
         function edit_delete(name) {
 
             $('#saveBtn').hide();
             $('#updateBtn').show();
-
             $('#jqxTabs').jqxTabs('select', 0);
-            jQuery.ajax({
+            $.ajax({
                 type: "GET",
                 cache: false,
                 async: false,
@@ -383,7 +451,7 @@
                 },
                 datatype: "json",
                 success: function(response) {
-                    var json = jQuery.parseJSON(response);
+                    var json = $.parseJSON(response);
                     $("#table_name").val(json.data.TABLE_COMMENT);
                     $("#action_status").val('edit');
                     $("#hidden_old_table_name").val(json.data.TABLE_NAME);
@@ -395,9 +463,9 @@
         }
 
         function call_ajax_submit() {
-            var postdata = jQuery('#table_name_form').serialize() + "&_token=" + jQuery('meta[name="csrf-token"]').attr(
+            var postdata = $('#table_name_form').serialize() + "&_token=" + $('meta[name="csrf-token"]').attr(
                 'content');
-            jQuery.ajax({
+            $.ajax({
                 type: "POST",
                 cache: false,
                 async: true,
@@ -405,8 +473,8 @@
                 data: postdata,
                 datatype: "json",
                 success: function(addresponse) {
-                    var json = jQuery.parseJSON(addresponse);
-                    jQuery('meta[name="csrf-token"]').attr('content', json.csrf_token);
+                    var json = $.parseJSON(addresponse);
+                    $('meta[name="csrf-token"]').attr('content', json.csrf_token);
                 }
             });
         }
@@ -435,7 +503,7 @@
 
         function delete_action(name) {
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
-            jQuery.ajax({
+            $.ajax({
                 cache: false,
                 async: false,
                 contentType: false,
@@ -450,7 +518,7 @@
                     val: name,
                 },
                 success: function(res) {
-                    jQuery('meta[name="csrf-token"]').attr('content', res.csrf_token);
+                    $('meta[name="csrf-token"]').attr('content', res.csrf_token);
                 }
             });
 
@@ -564,39 +632,18 @@
                                     <th scope="col">Length</th>
                                     <th scope="col">Default</th>
                                     <th scope="col">Comment</th>
+                                    <th scope="col">is Nullable</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
+                            <input type="hidden" name="table_attributes_length_count" id="table_attributes_length_count">
                             <tbody id="table_tuple_attributes">
-                                <tr>
-                                    <th scope="row">
-                                        <input type="text" id="column_name" name="column_name" class="form-control">
-                                    </th>
-                                    <td>
-                                        <select id="data_type" name="data_type" class="form-select">
-                                            {!! $column_data_type_str !!}
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <input type="number" id="length" name="length" class="form-control">
-                                    </td>
-                                    <td>
-                                        <input type="text" id="default" name="default" class="form-control">
-                                    </td>
-                                    <td>
-                                        <textarea rows="1" cols="10" class="form-control" placeholder="Enter text here"></textarea>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-sm btn-danger btn-wave waves-effect waves-light">
-                                            <i class="feather-trash align-middle me-2 d-inline-block"></i>Delete
-                                        </button>
-                                    </td>
-                                </tr>
+                               
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td style="text-align: right" colspan="6">
-                                        <span style="cursor: pointer"><img width="30px"
+                                    <td style="text-align: right" colspan="7">
+                                        <span  style="cursor: pointer"><img width="30px" onclick="add_more_attribute()"
                                                 src="{{ asset('public/assets/action_icon/add-button.png') }}"
                                                 alt=""></span>
                                     </td>
@@ -608,6 +655,7 @@
             </div>
             <div class="d-flex justify-content-center">
                 <button type="button" class="btn btn-success"> Save </button>
+                <button type="button" class="btn btn-danger" style="margin-left: 10px;" id="cancelButton"> Close </button>
             </div>
 
         </div>
