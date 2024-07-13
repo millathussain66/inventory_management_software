@@ -100,22 +100,11 @@ class ParameterSetup extends Model
         }
 
         if ($sortorder == '') {
-            $sortdatafield = "table_name";
-            $sortorder = "DESC";
+            $sortdatafield = "CREATE_DATE_TIME";
+            $sortorder = "asc";
         }
         $limit = 10;
-        $offset = 0; // or any offset you need
-        // $data = DB::table('information_schema.tables as j0')
-        //     ->select(
-        //         'j0.*',
-        //         DB::raw("DATE_FORMAT(j0.CREATE_TIME, '%a %b %d %Y') as CREATE_DATE_TIME"),
-        //         DB::raw("count(*) over() as total_row")
-        //     )
-        //     ->where('j0.table_schema', 'inventory_management_software')
-        //     ->orderBy($sortdatafield, $sortorder)
-        //     ->offset($offset)
-        //     ->limit($limit);
-        // $q = $data->get();
+        $offset = 0;
 
         $data = DB::table('information_schema.tables as j0')
             ->select(
@@ -133,7 +122,9 @@ class ParameterSetup extends Model
             ->limit($limit);
         $q = $data->get();
 
-   
+
+
+
 
         if (count($q)  > 0) {
             $objCount = $q->toArray();
@@ -144,25 +135,6 @@ class ParameterSetup extends Model
             $result["Rows"] = array();
         }
         return $result;
-
-        //         SELECT 
-        //     t.*, 
-        //     COUNT(*) OVER() AS total_row,
-        //     (SELECT COUNT(*) 
-        //      FROM information_schema.columns 
-        //      WHERE table_schema = 'inventory_management_software' 
-        //      AND table_name = t.table_name) AS column_count
-        // FROM 
-        //     information_schema.tables t
-        // WHERE 
-        //     t.table_schema = 'inventory_management_software'
-        // ORDER BY 
-        //     t.table_name DESC 
-        // LIMIT 
-        //     10 OFFSET 0;
-
-
-
     }
     public function duplicate_check($request)
     {
@@ -173,14 +145,42 @@ class ParameterSetup extends Model
     }
     public function store($request)
     {
-        $DB_STATEMENT = "CREATE TABLE $request->table_name_hidden (
-            id INT PRIMARY KEY
-        )";
-        $DB_RESULT = DB::statement($DB_STATEMENT);
-        if ($DB_RESULT == true) {
-            return 1;
+        if ($request->action_status == "add") {
+            // Sanitize the table name to avoid SQL injection
+            $tableName = preg_replace('/[^a-zA-Z0-9_]/', '', $request->table_name_hidden);
+            $tableComment = addslashes($request->table_name);
+
+            $DB_STATEMENT = "CREATE TABLE $tableName (
+                id INT PRIMARY KEY
+            ) COMMENT = '$tableComment'";
         } else {
+            $oldTableName = preg_replace('/[^a-zA-Z0-9_]/', '', $request->hidden_old_table_name);
+            $newTableName = preg_replace('/[^a-zA-Z0-9_]/', '', $request->table_name_hidden);
+            $tableComment = addslashes($request->table_name);
+            $DB_STATEMENT = "ALTER TABLE $oldTableName RENAME TO $newTableName";
+        }
+
+        try {
+            $DB_RESULT = DB::statement($DB_STATEMENT);
+            if ($DB_RESULT === true) {
+                return 1;
+            } else {
+                return 0;
+            }
+        } catch (\Exception $e) {
             return 0;
         }
+    }
+
+    public function get_edit_data($request)
+    {
+        return DB::table('information_schema.tables as j0')
+            ->select(
+                'j0.TABLE_COMMENT',
+                'j0.TABLE_NAME',
+            )
+            ->where('j0.table_schema', 'inventory_management_software')
+            ->where('j0.table_name', $request->val)
+            ->first();
     }
 }

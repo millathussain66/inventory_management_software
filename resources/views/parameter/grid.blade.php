@@ -1,5 +1,20 @@
 @extends('layouts.master')
 @section('content')
+    @php
+        $column_data_type = config('system.column_data_type');
+        $column_data_type_str = '';
+        $column_data_type_str .= '<option value="">Select</option>';
+        if (!empty($column_data_type)) {
+            foreach ($column_data_type as $row) {
+                $column_data_type_str .= '<option value="' . $row . '">' . $row . '</option>';
+            }
+        }
+    @endphp
+
+
+
+
+
     <script>
         $(document).ready(function() {
             $.ajaxSetup({
@@ -7,7 +22,6 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-
 
             var source = {
                 datatype: "json",
@@ -86,11 +100,14 @@
                         align: 'center',
                         editable: false,
                         sortable: false,
+                        menu: false,
                         width: 30,
                         cellsrenderer: function(row) {
                             editrow = row;
                             var dataRecord = jQuery("#jqxgrid").jqxGrid('getrowdata', editrow);
-                            return '<div style="text-align:center;  cursor:pointer" onclick="delete_table(\'' + dataRecord.TABLE_NAME + '\');" ><img width="20px" align="center" src="{{ url('/') }}/public/assets/action_icon/delete.png"></div>';
+                            return '<div style="text-align:center;  cursor:pointer" onclick="delete_table(\'' +
+                                dataRecord.TABLE_NAME +
+                                '\');" ><img width="20px" align="center" src="{{ url('/') }}/public/assets/action_icon/delete.png"></div>';
                         }
                     },
                     {
@@ -99,15 +116,53 @@
                         align: 'center',
                         editable: false,
                         sortable: false,
+                        menu: false,
+
                         width: 30,
                         cellsrenderer: function(row) {
                             editrow = row;
                             var dataRecord = jQuery("#jqxgrid").jqxGrid('getrowdata', editrow);
-                            return '<div style="text-align:center;  cursor:pointer" onclick="delete_records(' +
-                                dataRecord.id +
-                                ');" ><img width="20px" align="center" src="{{ url('/') }}/public/assets/action_icon/edit.png"></div>';
+                            return '<div style="text-align:center;  cursor:pointer" onclick="edit_delete(\'' +
+                                dataRecord.TABLE_NAME +
+                                '\');" ><img width="20px" align="center" src="{{ url('/') }}/public/assets/action_icon/edit.png"></div>';
                         }
                     },
+
+                    {
+                        text: 'Add Column',
+                        align: 'center',
+                        editable: false,
+                        sortable: false,
+
+                        menu: false,
+
+                        width: 90,
+                        cellsrenderer: function(row) {
+                            editrow = row;
+                            var dataRecord = jQuery("#jqxgrid").jqxGrid('getrowdata', editrow);
+                            return '<div style="text-align:center;  cursor:pointer" onclick="add_column(\'' +
+                                dataRecord.TABLE_NAME +
+                                '\');" ><img width="20px" align="center" src="{{ url('/') }}/public/assets/action_icon/vertical.png"></div>';
+                        }
+                    },
+
+                    {
+                        text: 'Add Row',
+                        align: 'center',
+                        editable: false,
+                        sortable: false,
+                        menu: false,
+
+                        width: 80,
+                        cellsrenderer: function(row) {
+                            editrow = row;
+                            var dataRecord = jQuery("#jqxgrid").jqxGrid('getrowdata', editrow);
+                            return '<div style="text-align:center;  cursor:pointer" onclick="add_row(\'' +
+                                dataRecord.TABLE_NAME +
+                                '\');" ><img width="20px" align="center" src="{{ url('/') }}/public/assets/action_icon/database.png"></div>';
+                        }
+                    },
+
                     {
                         text: 'Table Name',
                         datafield: 'TABLE_NAME',
@@ -144,16 +199,22 @@
                     },
                 ]
             });
-
             $('#jqxTabs').jqxTabs({
                 width: '100%',
             });
-
+            $('#jqxTabs').bind('selected', function(event) {
+                if (event.args.item == 0) {}
+                if (event.args.item == 1) {
+                    clear_form();
+                    jQuery('#table_name_form').jqxValidator('hide');
+                    $("#jqxgrid").jqxGrid('updatebounddata');
+                }
+            });
             $('#jqxTabs').jqxTabs('select', 1);
             $("#table_name").on('blur change click focus mouseenter mouseleave keydown keyup keypress', function() {
                 var table_name = $("#table_name").val();
-                // table_name = table_name.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_]/g, '');
-                table_name = table_name.replace(/\s+/g, '_').replace(/[^a-zA-Z_]/g, '').toLowerCase();
+                // table_name = table_name.replace(/\s+/g, '_').replace(/[^a-zA-Z_]/g, '').toLowerCase();
+                table_name = table_name.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_]/g, '').toLowerCase();
                 table_name = "ref_" + table_name;
                 $("#dynamic_table_push").html(table_name);
                 $("#table_name_hidden").val(table_name);
@@ -165,6 +226,16 @@
                         message: 'required!',
                         action: 'keyup,blur',
                         rule: 'required'
+                    },
+                    {
+                        input: "#table_name",
+                        message: "Invalid characters found!",
+                        action: 'keyup, blur',
+                        rule: function(input, commit) {
+                            const value = input.val();
+                            const isValid = /^[a-zA-Z_]*$/.test(value);
+                            return isValid;
+                        }
                     },
                     {
                         input: '#table_name',
@@ -183,7 +254,7 @@
                     {
                         input: '#table_name',
                         message: 'Duplicate',
-                        action: 'keyup, blur, change',
+                        action: 'blur',
                         rule: function(input, commit) {
                             if (input.val() == '') {
                                 commit(true);
@@ -246,7 +317,82 @@
                 }
                 $('#table_name_form').jqxValidator('validate', validationResult);
             });
+            $("#updateBtn").bind('click', function() {
+                var validationResult = function(isValid) {
+                    if (isValid) {
+                        Swal.fire({
+                            title: "Do you want to Edit?",
+                            showCancelButton: true,
+                            confirmButtonText: "Save",
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                call_ajax_submit();
+                                Swal.fire("Edit!", "", "success");
+                                $("#jqxgrid").jqxGrid('clearselection');
+                                $("#jqxgrid").jqxGrid('updatebounddata');
+                                $('#jqxTabs').jqxTabs('select', 1);
+                            } else if (result.isDenied) {
+                                Swal.fire("Changes are not saved", "", "info");
+                            }
+                        });
+                    }
+                }
+                $('#table_name_form').jqxValidator('validate', validationResult);
+            });
+            jQuery("#add_column_window").jqxWindow({
+                height: 700,
+                width: 1200,
+                isModal: true,
+                zIndex: 99999999999999999,
+                autoOpen: false,
+                cancelButton: jQuery('#cancelButton')
+            });
         });
+
+        function add_column(name) {
+            jQuery("#historyheaderTitle").html("Table Name: " + name);
+            jQuery("#add_column_window").jqxWindow('open');
+            jQuery.ajax({
+                type: "GET",
+                cache: false,
+                async: false,
+                url: "{{ route('parameter.table_attributes') }}",
+                data: {
+                    val: name,
+                },
+                datatype: "json",
+                success: function(response) {
+
+                }
+            });
+        }
+
+        function edit_delete(name) {
+
+            $('#saveBtn').hide();
+            $('#updateBtn').show();
+
+            $('#jqxTabs').jqxTabs('select', 0);
+            jQuery.ajax({
+                type: "GET",
+                cache: false,
+                async: false,
+                url: "{{ route('parameter.get_edit_data') }}",
+                data: {
+                    val: name,
+                },
+                datatype: "json",
+                success: function(response) {
+                    var json = jQuery.parseJSON(response);
+                    $("#table_name").val(json.data.TABLE_COMMENT);
+                    $("#action_status").val('edit');
+                    $("#hidden_old_table_name").val(json.data.TABLE_NAME);
+                },
+                error: function(request, error) {
+                    console.log("Server Error");
+                },
+            });
+        }
 
         function call_ajax_submit() {
             var postdata = jQuery('#table_name_form').serialize() + "&_token=" + jQuery('meta[name="csrf-token"]').attr(
@@ -275,18 +421,19 @@
                 cancelButtonColor: "#d33",
                 confirmButtonText: "Yes, delete it!"
             }).then((result) => {
-            if (result.isConfirmed) {
-                delete_action(name);
-                Swal.fire({
-                    position: "top-end",
-                    title: "Deleted!",
-                    text: "Your file has been deleted.",
-                    icon: "success"
-                });
-            }
+                if (result.isConfirmed) {
+                    delete_action(name);
+                    Swal.fire({
+                        position: "top-end",
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success"
+                    });
+                }
             });
         }
-        function delete_action(name){
+
+        function delete_action(name) {
             var csrfToken = $('meta[name="csrf-token"]').attr('content');
             jQuery.ajax({
                 cache: false,
@@ -298,28 +445,26 @@
                 },
                 method: "POST",
                 datatype: "json",
-                url: "{{ route('parameter.delete')}}",
+                url: "{{ route('parameter.delete') }}",
+                data: {
+                    val: name,
+                },
                 success: function(res) {
                     jQuery('meta[name="csrf-token"]').attr('content', res.csrf_token);
                 }
             });
 
-
-
-
-
-
-
-
-
-
-
-            
         }
-
 
         function tab_change() {
             $('#jqxTabs').jqxTabs('select', 0);
+        }
+
+        function clear_form() {
+            $("#table_name").val('');
+            $("#action_status").val('add');
+            $('#updateBtn').hide();
+            $('#saveBtn').show();
         }
     </script>
     <div class="page-header">
@@ -335,7 +480,6 @@
         </div>
     </div>
 
-
     <div id='jqxTabs'>
         <ul>
             <li style="margin-left: 30px;">Form</li>
@@ -344,7 +488,12 @@
         <div style="overflow: hidden;">
             <div class="main-wrapper">
                 <div class="content">
-                    <form action="" id="table_name_form">
+                    <form id="table_name_form">
+                        <input type="hidden" name="action_status" id="action_status" value="add">
+
+                        <input type="hidden" name="hidden_old_table_name" id="hidden_old_table_name">
+
+
                         <div class="card">
                             <div class="card-body add-product pb-0">
                                 <div class="accordion-card-one accordion" id="accordionExample">
@@ -377,6 +526,8 @@
                         </div>
                         <div class="mb-5">
                             <button type="button" class="btn btn-primary" id="saveBtn">Save</button>
+                            <button style="display: none" type="button" class="btn btn-primary"
+                                id="updateBtn">Update</button>
                         </div>
                     </form>
 
@@ -390,9 +541,79 @@
             <div id="jqxgrid"></div>
         </div>
     </div>
-@endsection
+
+    <div id="add_column_window">
+        <div>
+            <h4 class="modalheader" id="historyheaderTitle"></h4>
+        </div>
+        <div id="add_column_window_div">
+
+            <div class="card">
+
+                <div class="card-header">
+                    <h4 class="card-title">Table Attributes</h4>
+                </div>
+                <div class="card-body">
+
+                    <div class="table-responsive">
+                        <table class="table text-nowrap table-striped-columns table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Column Name</th>
+                                    <th scope="col">Data Type</th>
+                                    <th scope="col">Length</th>
+                                    <th scope="col">Default</th>
+                                    <th scope="col">Comment</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table_tuple_attributes">
+                                <tr>
+                                    <th scope="row">
+                                        <input type="text" id="column_name" name="column_name" class="form-control">
+                                    </th>
+                                    <td>
+                                        <select id="data_type" name="data_type" class="form-select">
+                                            {!! $column_data_type_str !!}
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input type="number" id="length" name="length" class="form-control">
+                                    </td>
+                                    <td>
+                                        <input type="text" id="default" name="default" class="form-control">
+                                    </td>
+                                    <td>
+                                        <textarea rows="1" cols="10" class="form-control" placeholder="Enter text here"></textarea>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-sm btn-danger btn-wave waves-effect waves-light">
+                                            <i class="feather-trash align-middle me-2 d-inline-block"></i>Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td style="text-align: right" colspan="6">
+                                        <span style="cursor: pointer"><img width="30px"
+                                                src="{{ asset('public/assets/action_icon/add-button.png') }}"
+                                                alt=""></span>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center">
+                <button type="button" class="btn btn-success"> Save </button>
+            </div>
+
+        </div>
+    @endsection
 
 
-{{-- SELECT * 
+    {{-- SELECT * 
 FROM information_schema.tables 
 WHERE table_schema = 'inventory_management_software'; --}}

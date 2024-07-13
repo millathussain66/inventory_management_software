@@ -124,8 +124,16 @@ class ParameterSetupController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ParameterSetup $parameterSetup)
+    public function destroy(Request $request)
     {
-        dd($parameterSetup);
+        dd($request);
+    }
+    public function get_edit_data(Request $request)
+    {
+        $num_row = $this->ParameterSetup->get_edit_data($request);
+        $var = [
+            "data" => $num_row,
+        ];
+        echo json_encode($var);
     }
 }
