@@ -186,4 +186,66 @@ class ParameterSetup extends Model
                 WHERE table_schema = 'inventory_management_software' AND table_name = '$request->val'";
         return DB::select($DB_SELECT);
     }
+    public function store_all($request) {
+
+        // dd($request);
+        $counter = $request->table_attributes_length_count;
+
+        for ($i=0; $i < $counter; $i++) {
+
+            $data_attribute_value = [
+                "TABLE_CATALOG"             => "def",
+                "TABLE_SCHEMA"              => env('DB_DATABASE'),
+                "TABLE_NAME"                => $request->input('table_name_att'),
+                "COLUMN_NAME"               => $request->input('column_name_'.$i),
+                "ORDINAL_POSITION"          => '',
+                "COLUMN_DEFAULT"            => NULL,
+                "IS_NULLABLE"               => $request->input('is_nullable_'.$i),
+                "DATA_TYPE"                 => $request->input('data_type_'.$i),
+                "CHARACTER_MAXIMUM_LENGTH"  => NULL,
+                "CHARACTER_OCTET_LENGTH"    => intval(20),
+                "NUMERIC_PRECISION"         => NULL,
+                "NUMERIC_SCALE"             => NULL,
+                "DATETIME_PRECISION"        => NULL,
+                "CHARACTER_SET_NAME"        => config('database.connections.mysql.charset'),
+                "COLLATION_NAME"            => config('database.connections.mysql.collation'),
+                "COLUMN_TYPE"               => $request->input('column_type_'.$i),
+                "COLUMN_KEY"                => "",
+                "EXTRA"                     => "",
+                "PRIVILEGES"                => "select,insert,update,references",
+                "COLUMN_COMMENT"            => $request->input('column_comment_'.$i),
+                "IS_GENERATED"              => "NEVER",
+                "GENERATION_EXPRESSION"     => NULL
+            ];
+
+            // SELECT *
+            // FROM information_schema.columns
+            // WHERE table_schema = 'inventory_management_software' 
+
+
+            
+
+            // if($request->input('delete_status_'.$i)==1){
+            //     continue;
+            // }
+
+
+
+
+
+            echo "<pre>";
+            print_r($data_attribute_value);
+
+        }
+
+
+
+
+
+
+
+
+        
+
+    }
 }

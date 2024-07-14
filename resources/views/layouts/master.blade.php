@@ -8,7 +8,7 @@
     <meta name="author" content="Dreamguys - Bootstrap Admin Template">
     <meta name="robots" content="noindex, nofollow">
     <meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
-    <title>Dreams Pos Admin Template</title>
+    <title>Pos Admin </title>
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('public/assets/img/favicon.png') }}">
     <link rel="stylesheet" href="{{ asset('public/assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('public/assets/css/bootstrap-datetimepicker.min.css') }}">
@@ -83,13 +83,13 @@
         <div class="header">
 
             <div class="header-left active">
-                <a href="index.html" class="logo logo-normal">
+                <a href="{{ URL::to('/') }}" class="logo logo-normal">
                     <img src="{{ asset('public/assets/img/logo.png') }}" alt>
                 </a>
-                <a href="index.html" class="logo logo-white">
+                <a href="{{ URL::to('/') }}" class="logo logo-white">
                     <img src="{{ asset('public/assets/img/logo-white.png') }}" alt>
                 </a>
-                <a href="index.html" class="logo-small">
+                <a href="{{ URL::to('/') }}" class="logo-small">
                     <img src="{{ asset('public/assets/img/logo-small.png') }}" alt>
                 </a>
                 <a id="toggle_btn" href="javascript:void(0);">
@@ -141,11 +141,9 @@
                                         <li><a href="javascript:void(0);">Aron Varu<img src="" alt
                                                     class="img-fluid"></a>
                                         </li>
-                                        <li><a href="javascript:void(0);">Jonita<img src="" alt
-                                                    class="img-fluid"></a>
+                                        <li><a href="javascript:void(0);">Jonita<img src="" alt class="img-fluid"></a>
                                         </li>
-                                        <li><a href="javascript:void(0);">Aaron<img src="" alt
-                                                    class="img-fluid"></a>
+                                        <li><a href="javascript:void(0);">Aaron<img src="" alt class="img-fluid"></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -154,62 +152,6 @@
                     </div>
                 </li>
 
-
-                <li class="nav-item dropdown has-arrow main-drop select-store-dropdown">
-                    <a href="javascript:void(0);" class="dropdown-toggle nav-link select-store"
-                        data-bs-toggle="dropdown">
-                        <span class="user-info">
-                            <span class="user-letter">
-                                <img src="" alt="Store Logo"
-                                    class="img-fluid">
-                            </span>
-                            <span class="user-detail">
-                                <span class="user-name">Select Store</span>
-                            </span>
-                        </span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <a href="javascript:void(0);" class="dropdown-item">
-                            <img src="" alt="Store Logo"
-                                class="img-fluid"> Grocery
-                            Alpha
-                        </a>
-                        <a href="javascript:void(0);" class="dropdown-item">
-                            <img src="" alt="Store Logo"
-                                class="img-fluid"> Grocery Apex
-                        </a>
-                        <a href="javascript:void(0);" class="dropdown-item">
-                            <img src="" alt="Store Logo"
-                                class="img-fluid"> Grocery Bevy
-                        </a>
-                        <a href="javascript:void(0);" class="dropdown-item">
-                            <img src="" alt="Store Logo"
-                                class="img-fluid"> Grocery Eden
-                        </a>
-                    </div>
-                </li>
-
-
-                <li class="nav-item dropdown has-arrow flag-nav nav-item-box">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="javascript:void(0);"
-                        role="button">
-                        <img src="" alt="Language" class="img-fluid">
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <a href="javascript:void(0);" class="dropdown-item active">
-                            <img src="" alt height="16"> English
-                        </a>
-                        <a href="javascript:void(0);" class="dropdown-item">
-                            <img src="" alt height="16"> French
-                        </a>
-                        <a href="javascript:void(0);" class="dropdown-item">
-                            <img src="" alt height="16"> Spanish
-                        </a>
-                        <a href="javascript:void(0);" class="dropdown-item">
-                            <img src="" alt height="16"> German
-                        </a>
-                    </div>
-                </li>
 
                 <li class="nav-item nav-item-box">
                     <a href="javascript:void(0);" id="btnFullscreen">
@@ -334,8 +276,7 @@
                     <a href="javascript:void(0);" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
                         <span class="user-info">
                             <span class="user-letter">
-                                <img src="" alt
-                                    class="img-fluid">
+                                <img src="" alt class="img-fluid">
                             </span>
                             <span class="user-detail">
                                 <span class="user-name">John Smilga</span>
@@ -346,8 +287,7 @@
                     <div class="dropdown-menu menu-drop-user">
                         <div class="profilename">
                             <div class="profileset">
-                                <span class="user-img"><img
-                                        src="" alt>
+                                <span class="user-img"><img src="" alt>
                                     <span class="status online"></span></span>
                                 <div class="profilesets">
                                     <h6>John Smilga</h6>
@@ -361,8 +301,8 @@
                             <a class="dropdown-item" href="general-settings.html"><i class="me-2"
                                     data-feather="settings"></i>Settings</a>
                             <hr class="m-0">
-                            <a class="dropdown-item logout pb-0" href="signin.html"><img src=""
-                                    class="me-2" alt="img">Logout</a>
+                            <a class="dropdown-item logout pb-0" href="signin.html"><img src="" class="me-2"
+                                    alt="img">Logout</a>
                         </div>
                     </div>
                 </li>
@@ -386,41 +326,16 @@
             <div class="sidebar-inner slimscroll">
                 <div id="sidebar-menu" class="sidebar-menu">
                     <ul>
-                        <li class="submenu-open">
+                        <li class="submenu-open {{ Request::is('/') ? 'active' : '' }}">
                             <h6 class="submenu-hdr">Main</h6>
                             <ul>
-                                <li class="submenu">
-                                    <a href="javascript:void(0);"><i
-                                            data-feather="grid"></i><span>Dashboard</span><span
-                                            class="menu-arrow"></span></a>
-                                    <ul>
-                                        <li><a href="index.html">Admin Dashboard</a></li>
-                                        <li><a href="sales-dashboard.html">Sales Dashboard</a></li>
-                                    </ul>
+                                <li class="">
+                                    <a href="{{ URL::to('/') }}"><i data-feather="grid"></i><span>Dashboard</span></a>
                                 </li>
-                                <li class="submenu">
-                                    <a href="javascript:void(0);"><i
-                                            data-feather="smartphone"></i><span>Application</span><span
-                                            class="menu-arrow"></span></a>
-                                    <ul>
-                                        <li><a href="chat.html">Chat</a></li>
-                                        <li class="submenu submenu-two"><a href="javascript:void(0);">Call<span
-                                                    class="menu-arrow inside-submenu"></span></a>
-                                            <ul>
-                                                <li><a href="video-call.html">Video Call</a></li>
-                                                <li><a href="audio-call.html">Audio Call</a></li>
-                                                <li><a href="call-history.html">Call History</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="calendar.html">Calendar</a></li>
-                                        <li><a href="email.html">Email</a></li>
-                                        <li><a href="todo.html">To Do</a></li>
-                                        <li><a href="notes.html">Notes</a></li>
-                                        <li><a href="file-manager.html">File Manager</a></li>
-                                    </ul>
-                                </li>
+
                             </ul>
                         </li>
+
                         <li class="submenu-open">
                             <h6 class="submenu-hdr">Inventory</h6>
                             <ul>
@@ -433,8 +348,8 @@
                                             Products</span></a></li>
                                 <li><a href="low-stocks.html"><i data-feather="trending-down"></i><span>Low
                                             Stocks</span></a></li>
-                                <li><a href="category-list.html"><i
-                                            data-feather="codepen"></i><span>Category</span></a></li>
+                                <li><a href="category-list.html"><i data-feather="codepen"></i><span>Category</span></a>
+                                </li>
                                 <li><a href="sub-categories.html"><i data-feather="speaker"></i><span>Sub
                                             Category</span></a></li>
                                 <li><a href="brand-list.html"><i data-feather="tag"></i><span>Brands</span></a></li>
@@ -463,22 +378,22 @@
                         <li class="submenu-open">
                             <h6 class="submenu-hdr">Sales</h6>
                             <ul>
-                                <li><a href="sales-list.html"><i
-                                            data-feather="shopping-cart"></i><span>Sales</span></a></li>
+                                <li><a href="sales-list.html"><i data-feather="shopping-cart"></i><span>Sales</span></a>
+                                </li>
                                 <li><a href="invoice-report.html"><i
                                             data-feather="file-text"></i><span>Invoices</span></a></li>
                                 <li><a href="sales-returns.html"><i data-feather="copy"></i><span>Sales
                                             Return</span></a></li>
-                                <li><a href="quotation-list.html"><i
-                                            data-feather="save"></i><span>Quotation</span></a></li>
+                                <li><a href="quotation-list.html"><i data-feather="save"></i><span>Quotation</span></a>
+                                </li>
                                 <li><a href="pos.html"><i data-feather="hard-drive"></i><span>POS</span></a></li>
                             </ul>
                         </li>
                         <li class="submenu-open">
                             <h6 class="submenu-hdr">Promo</h6>
                             <ul>
-                                <li><a href="coupons.html"><i
-                                            data-feather="shopping-cart"></i><span>Coupons</span></a></li>
+                                <li><a href="coupons.html"><i data-feather="shopping-cart"></i><span>Coupons</span></a>
+                                </li>
                             </ul>
                         </li>
                         <li class="submenu-open">
@@ -486,8 +401,8 @@
                             <ul>
                                 <li><a href="purchase-list.html"><i
                                             data-feather="shopping-bag"></i><span>Purchases</span></a></li>
-                                <li><a href="purchase-order-report.html"><i
-                                            data-feather="file-minus"></i><span>Purchase Order</span></a></li>
+                                <li><a href="purchase-order-report.html"><i data-feather="file-minus"></i><span>Purchase
+                                            Order</span></a></li>
                                 <li><a href="purchase-returns.html"><i data-feather="refresh-cw"></i><span>Purchase
                                             Return</span></a></li>
                             </ul>
@@ -521,8 +436,8 @@
                         <li class="submenu-open">
                             <h6 class="submenu-hdr">HRM</h6>
                             <ul>
-                                <li><a href="employees-grid.html"><i
-                                            data-feather="user"></i><span>Employees</span></a></li>
+                                <li><a href="employees-grid.html"><i data-feather="user"></i><span>Employees</span></a>
+                                </li>
                                 <li><a href="department-grid.html"><i
                                             data-feather="users"></i><span>Departments</span></a></li>
                                 <li><a href="designation.html"><i
@@ -547,8 +462,8 @@
                                         <li><a href="leave-types.html">Leave Types</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="holidays.html"><i
-                                            data-feather="credit-card"></i><span>Holidays</span></a></li>
+                                <li><a href="holidays.html"><i data-feather="credit-card"></i><span>Holidays</span></a>
+                                </li>
                                 <li class="submenu">
                                     <a href="payroll-list.html"><i
                                             data-feather="dollar-sign"></i><span>Payroll</span><span
@@ -754,138 +669,8 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="submenu-open">
-                            <h6 class="submenu-hdr">UI Interface</h6>
-                            <ul>
-                                <li class="submenu">
-                                    <a href="javascript:void(0);">
-                                        <i data-feather="layers"></i><span>Base UI</span><span
-                                            class="menu-arrow"></span>
-                                    </a>
-                                    <ul>
-                                        <li><a href="ui-alerts.html">Alerts</a></li>
-                                        <li><a href="ui-accordion.html">Accordion</a></li>
-                                        <li><a href="ui-avatar.html">Avatar</a></li>
-                                        <li><a href="ui-badges.html">Badges</a></li>
-                                        <li><a href="ui-borders.html">Border</a></li>
-                                        <li><a href="ui-buttons.html">Buttons</a></li>
-                                        <li><a href="ui-buttons-group.html">Button Group</a></li>
-                                        <li><a href="ui-breadcrumb.html">Breadcrumb</a></li>
-                                        <li><a href="ui-cards.html">Card</a></li>
-                                        <li><a href="ui-carousel.html">Carousel</a></li>
-                                        <li><a href="ui-colors.html">Colors</a></li>
-                                        <li><a href="ui-dropdowns.html">Dropdowns</a></li>
-                                        <li><a href="ui-grid.html">Grid</a></li>
-                                        <li><a href="ui-images.html">Images</a></li>
-                                        <li><a href="ui-lightbox.html">Lightbox</a></li>
-                                        <li><a href="ui-media.html">Media</a></li>
-                                        <li><a href="ui-modals.html">Modals</a></li>
-                                        <li><a href="ui-offcanvas.html">Offcanvas</a></li>
-                                        <li><a href="ui-pagination.html">Pagination</a></li>
-                                        <li><a href="ui-popovers.html">Popovers</a></li>
-                                        <li><a href="ui-progress.html">Progress</a></li>
-                                        <li><a href="ui-placeholders.html">Placeholders</a></li>
-                                        <li><a href="ui-rangeslider.html">Range Slider</a></li>
-                                        <li><a href="ui-spinner.html">Spinner</a></li>
-                                        <li><a href="ui-sweetalerts.html">Sweet Alerts</a></li>
-                                        <li><a href="ui-nav-tabs.html">Tabs</a></li>
-                                        <li><a href="ui-toasts.html">Toasts</a></li>
-                                        <li><a href="ui-tooltips.html">Tooltips</a></li>
-                                        <li><a href="ui-typography.html">Typography</a></li>
-                                        <li><a href="ui-video.html">Video</a></li>
-                                    </ul>
-                                </li>
-                                <li class="submenu">
-                                    <a href="javascript:void(0);">
-                                        <i data-feather="layers"></i><span>Advanced UI</span><span
-                                            class="menu-arrow"></span>
-                                    </a>
-                                    <ul>
-                                        <li><a href="ui-ribbon.html">Ribbon</a></li>
-                                        <li><a href="ui-clipboard.html">Clipboard</a></li>
-                                        <li><a href="ui-drag-drop.html">Drag & Drop</a></li>
-                                        <li><a href="ui-rangeslider.html">Range Slider</a></li>
-                                        <li><a href="ui-rating.html">Rating</a></li>
-                                        <li><a href="ui-text-editor.html">Text Editor</a></li>
-                                        <li><a href="ui-counter.html">Counter</a></li>
-                                        <li><a href="ui-scrollbar.html">Scrollbar</a></li>
-                                        <li><a href="ui-stickynote.html">Sticky Note</a></li>
-                                        <li><a href="ui-timeline.html">Timeline</a></li>
-                                    </ul>
-                                </li>
-                                <li class="submenu">
-                                    <a href="javascript:void(0);"><i
-                                            data-feather="bar-chart-2"></i><span>Charts</span><span
-                                            class="menu-arrow"></span></a>
-                                    <ul>
-                                        <li><a href="chart-apex.html">Apex Charts</a></li>
-                                        <li><a href="chart-c3.html">Chart C3</a></li>
-                                        <li><a href="chart-js.html">Chart Js</a></li>
-                                        <li><a href="chart-morris.html">Morris Charts</a></li>
-                                        <li><a href="chart-flot.html">Flot Charts</a></li>
-                                        <li><a href="chart-peity.html">Peity Charts</a></li>
-                                    </ul>
-                                </li>
-                                <li class="submenu">
-                                    <a href="javascript:void(0);"><i
-                                            data-feather="database"></i><span>Icons</span><span
-                                            class="menu-arrow"></span></a>
-                                    <ul>
-                                        <li><a href="icon-fontawesome.html">Fontawesome Icons</a></li>
-                                        <li><a href="icon-feather.html">Feather Icons</a></li>
-                                        <li><a href="icon-ionic.html">Ionic Icons</a></li>
-                                        <li><a href="icon-material.html">Material Icons</a></li>
-                                        <li><a href="icon-pe7.html">Pe7 Icons</a></li>
-                                        <li><a href="icon-simpleline.html">Simpleline Icons</a></li>
-                                        <li><a href="icon-themify.html">Themify Icons</a></li>
-                                        <li><a href="icon-weather.html">Weather Icons</a></li>
-                                        <li><a href="icon-typicon.html">Typicon Icons</a></li>
-                                        <li><a href="icon-flag.html">Flag Icons</a></li>
-                                    </ul>
-                                </li>
-                                <li class="submenu">
-                                    <a href="javascript:void(0);">
-                                        <i data-feather="edit"></i><span>Forms</span><span class="menu-arrow"></span>
-                                    </a>
-                                    <ul>
-                                        <li class="submenu submenu-two">
-                                            <a href="javascript:void(0);">Form Elements<span
-                                                    class="menu-arrow inside-submenu"></span></a>
-                                            <ul>
-                                                <li><a href="form-basic-inputs.html">Basic Inputs</a></li>
-                                                <li><a href="form-checkbox-radios.html">Checkbox & Radios</a></li>
-                                                <li><a href="form-input-groups.html">Input Groups</a></li>
-                                                <li><a href="form-grid-gutters.html">Grid & Gutters</a></li>
-                                                <li><a href="form-select.html">Form Select</a></li>
-                                                <li><a href="form-mask.html">Input Masks</a></li>
-                                                <li><a href="form-fileupload.html">File Uploads</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="submenu submenu-two">
-                                            <a href="javascript:void(0);">Layouts<span
-                                                    class="menu-arrow inside-submenu"></span></a>
-                                            <ul>
-                                                <li><a href="form-horizontal.html">Horizontal Form</a></li>
-                                                <li><a href="form-vertical.html">Vertical Form</a></li>
-                                                <li><a href="form-floating-labels.html">Floating Labels</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="form-validation.html">Form Validation</a></li>
-                                        <li><a href="form-select2.html">Select2</a></li>
-                                        <li><a href="form-wizard.html">Form Wizard</a></li>
-                                    </ul>
-                                </li>
-                                <li class="submenu">
-                                    <a href="javascript:void(0);"><i
-                                            data-feather="columns"></i><span>Tables</span><span
-                                            class="menu-arrow"></span></a>
-                                    <ul>
-                                        <li><a href="tables-basic.html">Basic Tables </a></li>
-                                        <li><a href="data-tables.html">Data Table </a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
+                   
+
                         <li class="submenu-open">
                             <h6 class="submenu-hdr">Parameter Setup</h6>
                             <ul>
@@ -947,9 +732,8 @@
                                 </a>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <a class="tablinks nav-link active" href="#set4" id="set-tab4"
-                                    data-bs-toggle="tab" data-bs-target="#document" role="tab"
-                                    aria-selected="true">
+                                <a class="tablinks nav-link active" href="#set4" id="set-tab4" data-bs-toggle="tab"
+                                    data-bs-target="#document" role="tab" aria-selected="true">
                                     <i data-feather="user"></i>
                                 </a>
                             </li>
@@ -982,8 +766,7 @@
                                         class="menu-arrow"></span></a>
                                 <ul>
                                     <li><a href="chat.html">Chat</a></li>
-                                    <li class="submenu submenu-two"><a
-                                            href="javascript:void(0);"><span>Call</span><span
+                                    <li class="submenu submenu-two"><a href="javascript:void(0);"><span>Call</span><span
                                                 class="menu-arrow inside-submenu"></span></a>
                                         <ul>
                                             <li><a href="video-call.html">Video Call</a></li>
@@ -1029,8 +812,7 @@
                             <li><a href="stock-adjustment.html"><span>Stock Adjustment</span></a></li>
                             <li><a href="stock-transfer.html"><span>Stock Transfer</span></a></li>
                             <li class="submenu">
-                                <a href="javascript:void(0);"><span>Expenses</span><span
-                                        class="menu-arrow"></span></a>
+                                <a href="javascript:void(0);"><span>Expenses</span><span class="menu-arrow"></span></a>
                                 <ul>
                                     <li><a href="expense-list.html">Expenses</a></li>
                                     <li><a href="expense-category.html">Expense Category</a></li>
@@ -1201,8 +983,7 @@
                                 </ul>
                             </li>
                             <li class="submenu">
-                                <a href="javascript:void(0);"><span>Tables</span><span
-                                        class="menu-arrow"></span></a>
+                                <a href="javascript:void(0);"><span>Tables</span><span class="menu-arrow"></span></a>
                                 <ul>
                                     <li><a href="tables-basic.html">Basic Tables </a></li>
                                     <li><a href="data-tables.html">Data Table </a></li>
@@ -1275,8 +1056,7 @@
                                 </ul>
                             </li>
                             <li class="submenu">
-                                <a href="javascript:void(0);"><span>Places</span><span
-                                        class="menu-arrow"></span></a>
+                                <a href="javascript:void(0);"><span>Places</span><span class="menu-arrow"></span></a>
                                 <ul>
                                     <li><a href="countries.html">Countries</a></li>
                                     <li><a href="states.html">States</a></li>
@@ -1405,8 +1185,7 @@
                                         class="menu-arrow"></span></a>
                                 <ul>
                                     <li><a href="chat.html">Chat</a></li>
-                                    <li class="submenu submenu-two"><a
-                                            href="javascript:void(0);"><span>Call</span><span
+                                    <li class="submenu submenu-two"><a href="javascript:void(0);"><span>Call</span><span
                                                 class="menu-arrow inside-submenu"></span></a>
                                         <ul>
                                             <li><a href="video-call.html">Video Call</a></li>
@@ -1457,8 +1236,7 @@
                                 </ul>
                             </li>
                             <li class="submenu">
-                                <a href="javascript:void(0);"><span>Purchase</span><span
-                                        class="menu-arrow"></span></a>
+                                <a href="javascript:void(0);"><span>Purchase</span><span class="menu-arrow"></span></a>
                                 <ul>
                                     <li><a href="purchase-list.html"><span>Purchases</span></a></li>
                                     <li><a href="purchase-order-report.html"><span>Purchase Order</span></a></li>
@@ -1469,8 +1247,7 @@
                                 </ul>
                             </li>
                             <li class="submenu">
-                                <a href="javascript:void(0);"><span>Expenses</span><span
-                                        class="menu-arrow"></span></a>
+                                <a href="javascript:void(0);"><span>Expenses</span><span class="menu-arrow"></span></a>
                                 <ul>
                                     <li><a href="expense-list.html">Expenses</a></li>
                                     <li><a href="expense-category.html">Expense Category</a></li>
@@ -1483,8 +1260,7 @@
                                 Management</span> <span class="menu-arrow"></span></a>
                         <ul>
                             <li class="submenu">
-                                <a href="javascript:void(0);"><span>People</span><span
-                                        class="menu-arrow"></span></a>
+                                <a href="javascript:void(0);"><span>People</span><span class="menu-arrow"></span></a>
                                 <ul>
                                     <li><a href="customers.html"><span>Customers</span></a></li>
                                     <li><a href="suppliers.html"><span>Suppliers</span></a></li>
@@ -1501,8 +1277,7 @@
                                 </ul>
                             </li>
                             <li class="submenu">
-                                <a href="javascript:void(0);"><span>Base UI</span><span
-                                        class="menu-arrow"></span></a>
+                                <a href="javascript:void(0);"><span>Base UI</span><span class="menu-arrow"></span></a>
                                 <ul>
                                     <li><a href="ui-alerts.html">Alerts</a></li>
                                     <li><a href="ui-accordion.html">Accordion</a></li>
@@ -1553,8 +1328,7 @@
                                 </ul>
                             </li>
                             <li class="submenu">
-                                <a href="javascript:void(0);"><span>Charts</span><span
-                                        class="menu-arrow"></span></a>
+                                <a href="javascript:void(0);"><span>Charts</span><span class="menu-arrow"></span></a>
                                 <ul>
                                     <li><a href="chart-apex.html">Apex Charts</a></li>
                                     <li><a href="chart-c3.html">Chart C3</a></li>
@@ -1587,8 +1361,7 @@
                                 </ul>
                             </li>
                             <li class="submenu">
-                                <a href="javascript:void(0);"><span> Forms</span><span
-                                        class="menu-arrow"></span></a>
+                                <a href="javascript:void(0);"><span> Forms</span><span class="menu-arrow"></span></a>
                                 <ul>
                                     <li class="submenu submenu-two">
                                         <a href="javascript:void(0);"><span>Form Elements</span><span
@@ -1618,8 +1391,7 @@
                                 </ul>
                             </li>
                             <li class="submenu">
-                                <a href="javascript:void(0);"><span>Tables</span><span
-                                        class="menu-arrow"></span></a>
+                                <a href="javascript:void(0);"><span>Tables</span><span class="menu-arrow"></span></a>
                                 <ul>
                                     <li><a href="tables-basic.html">Basic Tables </a></li>
                                     <li><a href="data-tables.html">Data Table </a></li>
@@ -1705,16 +1477,14 @@
                                 </ul>
                             </li>
                             <li class="submenu">
-                                <a href="javascript:void(0);"><span>Places</span><span
-                                        class="menu-arrow"></span></a>
+                                <a href="javascript:void(0);"><span>Places</span><span class="menu-arrow"></span></a>
                                 <ul>
                                     <li><a href="countries.html">Countries</a></li>
                                     <li><a href="states.html">States</a></li>
                                 </ul>
                             </li>
                             <li class="submenu">
-                                <a href="javascript:void(0);"><span>Employees</span><span
-                                        class="menu-arrow"></span></a>
+                                <a href="javascript:void(0);"><span>Employees</span><span class="menu-arrow"></span></a>
                                 <ul>
                                     <li><a href="employees-grid.html"><span>Employees</span></a></li>
                                     <li><a href="department-grid.html"><span>Departments</span></a></li>
@@ -1888,25 +1658,26 @@
     <script src="{{ asset('public/assets/js/bootstrap-tagsinput.js') }}"></script>
     <script src="{{ asset('public/assets/js/sweetalert2.all.min.js') }}"></script>
     <script src="{{ asset('public/assets/js/sweetalerts.min.js') }}"></script>
-    <script src="{{ asset('public/assets/js/theme-script.js') }}"></script>
+    {{-- <script src="{{ asset('public/assets/js/theme-script.js') }}"></script> --}}
     <script src="{{ asset('public/assets/js/script.js') }}"></script>
-    <script src="{{ asset('public/assets/js/rocket-loader.min.js') }}"></script>
+
+    {{-- <script src="{{ asset('public/assets/js/rocket-loader.min.js') }}"></script> --}}
 
 </body>
 
 </html>
-{{-- 
+{{--
 Refarance Table List :
 
 
 Store Name :
- Warehouse 
- Category
-  Sub Category 
-   Sub Sub Category 
-   Brand
-   Unit
-    Selling Type 
-     Barcode Symbology 
-     Discount Type
-     Tax Type --}}
+Warehouse
+Category
+Sub Category
+Sub Sub Category
+Brand
+Unit
+Selling Type
+Barcode Symbology
+Discount Type
+Tax Type --}}

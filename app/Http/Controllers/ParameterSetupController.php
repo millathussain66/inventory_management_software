@@ -16,6 +16,7 @@ use Config;
 use Cookie;
 use URL;
 use File;
+use Symfony\Component\Console\Input\Input;
 
 class ParameterSetupController extends Controller
 {
@@ -141,4 +142,11 @@ class ParameterSetupController extends Controller
         ];
         echo json_encode($var);
     }
+
+    public function store_all(Request $request) {
+        $num_row = $this->ParameterSetup->store_all($request);
+    }
+
+    
+
 }
