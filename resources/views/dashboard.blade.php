@@ -1,5 +1,14 @@
 @extends('layouts.master')
 @section('content')
+
+
+
+@if (session('registration_success'))
+    <p>{{ session('status') }}</p>
+    <img src="{{ asset('storage/' . session('imagePath')) }}" alt="Avatar">
+@endif
+
+
     <div class="row">
         <div class="col-xl-3 col-sm-6 col-12 d-flex">
             <div class="dash-widget w-100">

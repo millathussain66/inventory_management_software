@@ -265,9 +265,12 @@
                         <span class="user-info">
                             <span class="user-letter">
                                 <img src="{{ asset('public/assets/profiles/avator1.jpg') }}" alt class="img-fluid">
+
+                              
+                              
                             </span>
                             <span class="user-detail">
-                                <span class="user-name">John Smilga</span>
+                                <span class="user-name">{{ session('user_name') }}</span>
                                 <span class="user-role">Super Admin</span>
                             </span>
                         </span>
@@ -278,7 +281,7 @@
                                 <span class="user-img"><img src="{{ asset('public/assets/profiles/avator1.jpg') }}" alt>
                                     <span class="status online"></span></span>
                                 <div class="profilesets">
-                                    <h6>John Smilga</h6>
+                                    <h6>{{ session('user_name') }}</h6>
                                     <h5>Super Admin</h5>
                                 </div>
                             </div>
