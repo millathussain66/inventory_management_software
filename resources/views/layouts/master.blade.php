@@ -17,19 +17,16 @@
     <link rel="stylesheet" href="{{ asset('public/assets/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('public/assets/css/summernote-bs4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('public/assets/css/bootstrap-tagsinput.css') }}">
-    <link rel="stylesheet" href="{{ asset('public/assets/css/dataTables.bootstrap5.min.css') }}">
     <link rel="stylesheet" href="{{ asset('public/assets/css/fontawesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('public/assets/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('public/assets/css/style.css') }}">
-    <script src="{{ asset('public/assets/js/jquery-3.7.1.min.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('public/assets_jqx/jqwidgets/styles/jqx.base.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ asset('public/assets_jqx/jqwidgets/styles/jqx.fresh.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ asset('public/assets_jqx/jqwidgets/styles/jqx.light.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ asset('public/assets_jqx/jqwidgets/styles/jqx.ui-sunny.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('public/assets_jqx/jqwidgets/styles/jqx.energyblue.css') }}"
-        type="text/css" />
+    <link rel="stylesheet" href="{{ asset('public/assets_jqx/jqwidgets/styles/jqx.energyblue.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ asset('public/assets_jqx/jqwidgets/styles/jqx.darkblue.css') }}" type="text/css" />
-
+    <script src="{{ asset('public/assets/js/jquery-3.7.1.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/assets_jqx/jqwidgets/jqxcore.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/assets_jqx/jqwidgets/jqxexpander.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/assets_jqx/jqwidgets/jqxvalidator.js') }}"></script>
@@ -50,27 +47,21 @@
     <script type="text/javascript" src="{{ asset('public/assets_jqx/jqwidgets/jqxgrid.edit.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/assets_jqx/jqwidgets/jqxgrid.filter.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/assets_jqx/jqwidgets/jqxgrid.sort.js') }}"></script>
-    <script type="text/javascript" src="{{ url('/') }}/public/assets_jqx/jqwidgets/jqxgrid.grouping.js"></script>
+    <script type="text/javascript" src="{{ asset('public/assets_jqx/jqwidgets/jqxgrid.grouping.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/assets_jqx/jqwidgets/jqxdata.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/assets_jqx/jqwidgets/jqxdata.export.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/assets_jqx/jqwidgets/jqxgrid.export.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/assets_jqx/jqwidgets/jqxpanel.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/assets_jqx/jqwidgets/jqxtooltip.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/assets_jqx/jqwidgets/jqxtabs.js') }}"></script>
-    <script type="text/javascript" src="{{ url('/') }}/public/assets_jqx/jqwidgets/jqxdraw.js"></script>
+    <script type="text/javascript" src="{{ asset('public/assets_jqx/jqwidgets/jqxdraw.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/assets_jqx/jqwidgets/jqxgrid.columnsresize.js') }}"></script>
-    <script type="text/javascript" src=" {{ asset('public/assets_jqx/jqwidgets/jqxdropdownbutton.js') }}"></script>
-    <script type="text/javascript" src=" {{ asset('public/assets_jqx/jqwidgets/jqxcolorpicker.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/assets_jqx/jqwidgets/jqxdropdownbutton.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('public/assets_jqx/jqwidgets/jqxcolorpicker.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/assets_jqx/jqwidgets/jqxeditor.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/assets_jqx/jqwidgets/jqxdragdrop.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/assets_jqx/jqwidgets/jqxform.js') }}"></script>
-    <script type="text/javascript" src="{{ url('/') }}/public/assets_jqx/jqwidgets/jqxgrid.columnsreorder.js">
-    </script>
-
-
-
-
-
+    <script type="text/javascript" src="{{ asset('public/assets_jqx/jqwidgets/jqxgrid.columnsreorder.js') }}"></script>
 </head>
 
 <body>
@@ -276,7 +267,7 @@
                     <a href="javascript:void(0);" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
                         <span class="user-info">
                             <span class="user-letter">
-                                <img src="" alt class="img-fluid">
+                                <img src="{{ asset('public/assets/profiles/avator1.jpg') }}" alt class="img-fluid">
                             </span>
                             <span class="user-detail">
                                 <span class="user-name">John Smilga</span>
@@ -287,7 +278,7 @@
                     <div class="dropdown-menu menu-drop-user">
                         <div class="profilename">
                             <div class="profileset">
-                                <span class="user-img"><img src="" alt>
+                                <span class="user-img"><img src="{{ asset('public/assets/profiles/avator1.jpg') }}" alt>
                                     <span class="status online"></span></span>
                                 <div class="profilesets">
                                     <h6>John Smilga</h6>
@@ -508,95 +499,6 @@
                                             Permissions</span></a></li>
                                 <li><a href="delete-account.html"><i data-feather="lock"></i><span>Delete Account
                                             Request</span></a></li>
-                            </ul>
-                        </li>
-                        <li class="submenu-open">
-                            <h6 class="submenu-hdr">Pages</h6>
-                            <ul>
-                                <li><a href="profile.html"><i data-feather="user"></i><span>Profile</span></a></li>
-                                <li class="submenu">
-                                    <a href="javascript:void(0);"><i
-                                            data-feather="shield"></i><span>Authentication</span><span
-                                            class="menu-arrow"></span></a>
-                                    <ul>
-                                        <li class="submenu submenu-two"><a href="javascript:void(0);">Login<span
-                                                    class="menu-arrow inside-submenu"></span></a>
-                                            <ul>
-                                                <li><a href="signin.html">Cover</a></li>
-                                                <li><a href="signin-2.html">Illustration</a></li>
-                                                <li><a href="signin-3.html">Basic</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="submenu submenu-two"><a href="javascript:void(0);">Register<span
-                                                    class="menu-arrow inside-submenu"></span></a>
-                                            <ul>
-                                                <li><a href="register.html">Cover</a></li>
-                                                <li><a href="register-2.html">Illustration</a></li>
-                                                <li><a href="register-3.html">Basic</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="submenu submenu-two"><a href="javascript:void(0);">Forgot
-                                                Password<span class="menu-arrow inside-submenu"></span></a>
-                                            <ul>
-                                                <li><a href="forgot-password.html">Cover</a></li>
-                                                <li><a href="forgot-password-2.html">Illustration</a></li>
-                                                <li><a href="forgot-password-3.html">Basic</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="submenu submenu-two"><a href="javascript:void(0);">Reset
-                                                Password<span class="menu-arrow inside-submenu"></span></a>
-                                            <ul>
-                                                <li><a href="reset-password.html">Cover</a></li>
-                                                <li><a href="reset-password-2.html">Illustration</a></li>
-                                                <li><a href="reset-password-3.html">Basic</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="submenu submenu-two"><a href="javascript:void(0);">Email
-                                                Verification<span class="menu-arrow inside-submenu"></span></a>
-                                            <ul>
-                                                <li><a href="email-verification.html">Cover</a></li>
-                                                <li><a href="email-verification-2.html">Illustration</a></li>
-                                                <li><a href="email-verification-3.html">Basic</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="submenu submenu-two"><a href="javascript:void(0);">2 Step
-                                                Verification<span class="menu-arrow inside-submenu"></span></a>
-                                            <ul>
-                                                <li><a href="two-step-verification.html">Cover</a></li>
-                                                <li><a href="two-step-verification-2.html">Illustration</a></li>
-                                                <li><a href="two-step-verification-3.html">Basic</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="lock-screen.html">Lock Screen</a></li>
-                                    </ul>
-                                </li>
-                                <li class="submenu">
-                                    <a href="javascript:void(0);"><i data-feather="file-minus"></i><span>Error
-                                            Pages</span><span class="menu-arrow"></span></a>
-                                    <ul>
-                                        <li><a href="error-404.html">404 Error </a></li>
-                                        <li><a href="error-500.html">500 Error </a></li>
-                                    </ul>
-                                </li>
-                                <li class="submenu">
-                                    <a href="javascript:void(0);"><i data-feather="map"></i><span>Places</span><span
-                                            class="menu-arrow"></span></a>
-                                    <ul>
-                                        <li><a href="countries.html">Countries</a></li>
-                                        <li><a href="states.html">States</a></li>
-                                    </ul>
-                                </li>
-                                <li class="active">
-                                    <a href="blank-page.html"><i data-feather="file"></i><span>Blank Page</span> </a>
-                                </li>
-                                <li>
-                                    <a href="coming-soon.html"><i data-feather="send"></i><span>Coming Soon</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="under-maintenance.html"><i data-feather="alert-triangle"></i><span>Under
-                                            Maintenance</span> </a>
-                                </li>
                             </ul>
                         </li>
                         <li class="submenu-open">
@@ -1636,20 +1538,8 @@
         </div>
     </div>
 
-    <div class="customizer-links" id="setdata">
-        <ul class="sticky-sidebar">
-            <li class="sidebar-icons">
-                <a href="#" class="navigation-add" data-bs-toggle="tooltip" data-bs-placement="left"
-                    data-bs-original-title="Theme">
-                    <i data-feather="settings" class="feather-five"></i>
-                </a>
-            </li>
-        </ul>
-    </div>
     <script src="{{ asset('public/assets/js/feather.min.js') }}"></script>
     <script src="{{ asset('public/assets/js/jquery.slimscroll.min.js') }}"></script>
-    <script src="{{ asset('public/assets/js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('public/assets/js/dataTables.bootstrap5.min.js') }}"></script>
     <script src="{{ asset('public/assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('public/assets/js/summernote-bs4.min.js') }}"></script>
     <script src="{{ asset('public/assets/js/select2.min.js') }}"></script>
@@ -1658,26 +1548,6 @@
     <script src="{{ asset('public/assets/js/bootstrap-tagsinput.js') }}"></script>
     <script src="{{ asset('public/assets/js/sweetalert2.all.min.js') }}"></script>
     <script src="{{ asset('public/assets/js/sweetalerts.min.js') }}"></script>
-    {{-- <script src="{{ asset('public/assets/js/theme-script.js') }}"></script> --}}
     <script src="{{ asset('public/assets/js/script.js') }}"></script>
-
-    {{-- <script src="{{ asset('public/assets/js/rocket-loader.min.js') }}"></script> --}}
-
 </body>
-
 </html>
-{{--
-Refarance Table List :
-
-
-Store Name :
-Warehouse
-Category
-Sub Category
-Sub Sub Category
-Brand
-Unit
-Selling Type
-Barcode Symbology
-Discount Type
-Tax Type --}}
