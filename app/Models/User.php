@@ -25,6 +25,12 @@ class User extends Authenticatable
         $id = DB::table('users')->insertGetId($data);
         return DB::table('users')->where('id', $id)->first();
     }
+
+    public static function update_profile($request) {
+
+        dd($request);
+
+    }
     
 
 }

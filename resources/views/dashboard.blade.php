@@ -3,10 +3,7 @@
 
 
 
-@if (session('registration_success'))
-    <p>{{ session('status') }}</p>
-    <img src="{{ asset('storage/' . session('imagePath')) }}" alt="Avatar">
-@endif
+{{ session('registration_success') }}
 
 
     <div class="row">

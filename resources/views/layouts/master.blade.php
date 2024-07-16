@@ -264,9 +264,13 @@
                     <a href="javascript:void(0);" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
                         <span class="user-info">
                             <span class="user-letter">
-                                <img src="{{ asset('public/assets/profiles/avator1.jpg') }}" alt class="img-fluid">
 
-                              
+
+                                <img src="{{ Avatar::create(session('user_name'))->toBase64(); }}">
+
+                                {{-- if set user --}}
+                                {{-- <img src="{{ Avatar::create(session('user_name'))->toBase64(); }}" class="img-fluid" alt="" srcset=""> --}}
+
                               
                             </span>
                             <span class="user-detail">
@@ -278,7 +282,12 @@
                     <div class="dropdown-menu menu-drop-user">
                         <div class="profilename">
                             <div class="profileset">
-                                <span class="user-img"><img src="{{ asset('public/assets/profiles/avator1.jpg') }}" alt>
+                                <span class="user-img">
+                                    {{-- <img src="{{ asset('public/assets/profiles/avator1.jpg') }}" alt> --}}
+
+
+                                    <img src="{{ Avatar::create(session('user_name'))->toBase64(); }}">
+
                                     <span class="status online"></span></span>
                                 <div class="profilesets">
                                     <h6>{{ session('user_name') }}</h6>
@@ -286,14 +295,11 @@
                                 </div>
                             </div>
                             <hr class="m-0">
-                            <a class="dropdown-item" href="profile.html"> <i class="me-2" data-feather="user"></i>
-                                My
-                                Profile</a>
+                            <a class="dropdown-item" href="{{ route('profile.view') }}"> <i class="me-2" data-feather="user"></i>My Profile</a>
                             <a class="dropdown-item" href="general-settings.html"><i class="me-2"
                                     data-feather="settings"></i>Settings</a>
                             <hr class="m-0">
-                            <a class="dropdown-item logout pb-0" href="signin.html"><img src="" class="me-2"
-                                    alt="img">Logout</a>
+                            <a class="dropdown-item logout pb-0" href="{{ route('user.logout') }}">Logout</a>
                         </div>
                     </div>
                 </li>

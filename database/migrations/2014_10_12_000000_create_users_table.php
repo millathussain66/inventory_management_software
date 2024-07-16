@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
-            $table->string('email')->unique()->nullable();
-            $table->string('phone')->unique()->nullable();
-            $table->string('user_name')->unique()->nullable();
-            $table->string('img_url')->unique()->nullable();
+            $table->string('email',191)->unique()->nullable();
+            $table->string('phone',191)->unique()->nullable();
+            $table->string('user_name',191)->unique()->nullable();
+            $table->string('img_url')->nullable();
             $table->tinyInteger('admin_status')->default(0)->comment("1=Admin 0=Normal User");
             $table->timestamp('email_verified_at')->nullable()->nullable();
             $table->string('password');

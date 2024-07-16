@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+    {{ session('registration_success') }}
 
 <head>
     <meta charset="utf-8">
@@ -47,7 +48,7 @@
                                     <input type="text" id="user_name" name="user_name" value="{{ old('user_name') }}" class="form-control">
                                     <img src="{{ asset('public/assets/img/icons/user-icon.svg') }}" alt="img">
                                 </div>
-                                @if ($errors->has('name'))
+                                @if ($errors->has('user_name'))
                                 <div class="error">{{ $errors->first('user_name') }}</div>
                                 @endif
 
