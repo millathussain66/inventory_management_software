@@ -21,16 +21,18 @@ return new class extends Migration
             $table->string('img_url')->nullable();
             $table->tinyInteger('admin_status')->default(0)->comment("1=Admin 0=Normal User");
             $table->timestamp('email_verified_at')->nullable()->nullable();
-            $table->string('password');
+            $table->text('password');
+            $table->tinyInteger('session_user_have')->default(0)->comment("1=Alrealy Login This User");
             $table->integer('created_by')->nullable();
             $table->date('created_at')->nullable();
             $table->integer('update_by')->nullable();
             $table->date('update_at')->nullable();
-            $table->integer('delete_by')->nullable();
+            $table->date('delete_by')->nullable();
             $table->date('delete_at')->nullable();
             $table->tinyInteger('terms')->default(0)->comment("0=on 1=off");
             $table->tinyInteger('status')->default(1)->comment("1=Active");
             $table->rememberToken();
+
         });
     }
 

@@ -6,6 +6,7 @@
             font-size: 0.875em;
             margin-top: 0.25em;
         }
+ 
     </style>
 
     <div class="page-header">
@@ -36,7 +37,17 @@
 
                             {{-- </div> --}}
                             <div class="profile-contentname">
-                                <h2>{{ session('user_name') }}</h2>
+
+                                @if (empty(session('first_name')) && empty(session('last_name')))
+                                    <h2>{{ session('user_name') }}</h2>
+                                @else
+                                    <h2>{{ session('first_name') }} {{ session('last_name') }} ( {{ session('user_name') }} )</h2>
+                                @endif
+
+
+
+
+
                                 <h4>Updates Your Photo and Personal Details.</h4>
                             </div>
                         </div>
@@ -67,7 +78,7 @@
                     <div class="col-lg-6 col-sm-12">
                         <div class="input-blocks">
                             <label>Email</label>
-                            <input type="email" id="email" name="email" class="form-control"
+                            <input type="email" id="email" name="email" class="form-control" readonly disabled
                                 value="{{ $info->email ?? '' }}">
                             @if ($errors->has('email'))
                                 <div class="error">{{ $errors->first('email') }}</div>
@@ -87,7 +98,7 @@
                     <div class="col-lg-6 col-sm-12">
                         <div class="input-blocks">
                             <label class="form-label">User Name</label>
-                            <input type="text" id="user_name" name="user_name" class="form-control"
+                            <input type="text" id="user_name" name="user_name" class="form-control" readonly disabled
                                 value="{{ $info->user_name ?? '' }}">
                             @if ($errors->has('user_name'))
                                 <div class="error">{{ $errors->first('user_name') }}</div>
@@ -109,7 +120,6 @@
                     </div>
                     <div class="col-12">
                         <button type="submit" class="btn btn-submit me-2">Submit</button>
-                        <a href="javascript:void(0);" class="btn btn-cancel">Cancel</a>
                     </div>
                 </div>
             </div>

@@ -3,20 +3,45 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
+
 use Laravolt\Avatar\Avatar;
 use Illuminate\Validation\Rule;
+use App\Models\CommonModel;
+
+
+// Common Use
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+// use Session;
+use Illuminate\Support\Facades\Session;
+
+use Config;
+use Cookie;
+use URL;
+use File;
+use Illuminate\Support\Facades\Redirect;
+use PhpParser\Node\Stmt\Return_;
+use Symfony\Component\Console\Input\Input;
+
 
 class UserController extends Controller
 {
     protected $avatar;
-    function __construct()
+    protected $CommonModel;
+    protected $User;
+    public function __construct()
     {
+        $this->CommonModel = new CommonModel();
+        $this->User = new User();
         $this->avatar = new Avatar();
     }
 
@@ -38,6 +63,7 @@ class UserController extends Controller
         if ($validatedData == true) {
             $usr_row = User::register_submit($request);
             session(['registration_success' => true]);
+            session(['go_in_status' => 'Register']);
             session([
                 'id' => $usr_row->id,
                 'first_name' => $usr_row->first_name,
@@ -52,6 +78,38 @@ class UserController extends Controller
         }
     }
 
+    public function login_submit(Request $request)
+    {
+        $validatedData = $request->validate([
+            'user_name' => 'required|string|max:255',
+            'password' => 'required|string|min:8',
+        ]);
+
+        if ($validatedData == true) {
+            $usr_row = User::login_submit($request);
+            if(!is_object($usr_row) && $usr_row==0){
+                return redirect()->route('user.login')->with("user_name",'User name / email address not found');
+            }else if(!is_object($usr_row) && $usr_row==1){
+                return redirect()->route('user.login')->with("password",'Password not match this user name');
+            }else if(!is_object($usr_row) && $usr_row==404){
+
+                return redirect()->route('user.login')->with("exist_login",'Already login this user in another devices');
+
+            }else{
+                session(['registration_success' => true]);
+                session(['go_in_status' => 'Login']);
+                session([
+                    'id'         => $usr_row->id,
+                    'first_name' => $usr_row->first_name,
+                    'last_name'  => $usr_row->last_name,
+                    'email'      => $usr_row->email,
+                    'user_name'  => $usr_row->user_name,
+                    'phone'      => $usr_row->phone,
+                ]);
+                return redirect()->route('dashboard')->with(['status' => 'Login successful!']);
+            }
+        }
+    }
     public function login(Request $request)
     {
         $request->validate([
@@ -62,7 +120,7 @@ class UserController extends Controller
         $user = User::where('email', $request->input('email'))->first();
 
         if ($user && Hash::check($request->input('password'), $user->password)) {
- 
+
             return redirect()->route('dashboard')->with('success', 'Login successful.');
         } else {
             // Passwords do not match
@@ -74,31 +132,58 @@ class UserController extends Controller
     public function profile()
     {
 
+        // $sql = "SELECT
+        //         mg.menu_name,
+        //         mlmc.menu_category_name,
+        //         GROUP_CONCAT(mlmc.menu_link_name, '#') AS menu_link_name,
+        //         GROUP_CONCAT(mlmc.menu_operation, '#') AS menu_operation
+        //         FROM
+        //         (
+        //             SELECT
+        //             mc.menu_category_name,
+        //             ml.menu_group_id,
+        //             ml.menu_link_name,
+        //             ml.menu_operation
+        //             FROM
+        //             menu_link ml
+        //             LEFT JOIN menu_category AS mc ON mc.id = ml.menu_category_id
+        //         ) mlmc
+        //         LEFT OUTER JOIN menu_group AS mg ON mlmc.menu_group_id = mg.id";
+
+
+        //   $data = DB::select($sql);
+
+        //   pad($data);
+
+
+
+
+
+     
         $info = DB::table('users')->where("id", session('id'))->first();
         $decryptedPassword = Crypt::decryptString($info->password);
-        return view('profile.grid', ['info' => $info,'decryptedPassword'=>$decryptedPassword]);
+        return view('profile.grid', ['info' => $info, 'decryptedPassword' => $decryptedPassword]);
     }
 
     public function update_profile(Request $request)
     {
         $validatedData = $request->validate([
-            'first_name'    => 'required|string|max:255',
-            'last_name'     => 'required|string|max:255',
-            'user_name' => [
-                'required',
-                'string',
-                'max:255',
-                'regex:/^[A-Za-z0-9]+$/',
-                Rule::unique('users')->ignore(session('id')),
-            ],
-            'email' => [
-                'required',
-                'email',
-                Rule::unique('users')->ignore(session('id')),
-            ],
+            'first_name'    => 'string|max:255',
+            'last_name'     => 'string|max:255',
+            // 'user_name' => [
+            //     'required',
+            //     'string',
+            //     'max:255',
+            //     'regex:/^[A-Za-z0-9]+$/',
+            //     Rule::unique('users')->ignore(session('id')),
+            // ],
+            // 'email' => [
+            //     'required',
+            //     'email',
+            //     Rule::unique('users')->ignore(session('id')),
+            // ],
             'password'   => 'required|string|min:8',
             'phone' => [
-                'required',
                 'numeric',
                 'min:11',
                 'regex:/^\d{11}$/',
@@ -107,13 +192,13 @@ class UserController extends Controller
         ]);
         if ($validatedData == true) {
             $usr_row = User::update_profile($request);
-                session([
-                    'first_name' => $usr_row->first_name,
-                    'last_name' => $usr_row->last_name,
-                    'email' => $usr_row->email,
-                    'user_name' => $usr_row->user_name,
-                    'phone' => $usr_row->phone,
-                ]);
+            session([
+                'first_name' => $usr_row->first_name,
+                'last_name' => $usr_row->last_name,
+                // 'email' => $usr_row->email,
+                // 'user_name' => $usr_row->user_name,
+                'phone' => $usr_row->phone,
+            ]);
 
             return redirect()->route('profile.view')->with(['status' => 'User informaiton Updates successful!']);
         } else {
@@ -123,10 +208,28 @@ class UserController extends Controller
 
     public function log_out()
     {
-
+        DB::table('users')->where('id', session('id'))->update(['session_user_have'=>0]);
+        CommonModel::login_history(session('id') , null, now() , "Logout");
         Session::flush();
         Session::regenerate();
         session(['registration_success' => false]);
         return redirect('/login')->with('message', 'Successfully logged out!');
     }
+
+    public function check_activity()
+    {
+        // if(session('id')!=null){
+        //     $data = DB::table('users')->select('session_user_have')->where('id', session('id'))->first();
+        //     Log::error($data->session_user_have);
+        //     echo json_encode($data->session_user_have);
+        // }else{
+
+        //     echo json_encode(0);
+        // }
+
+        Log::error(session('id'));
+
+    }
+
+
 }

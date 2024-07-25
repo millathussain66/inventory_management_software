@@ -20,7 +20,8 @@ $column_data_type_str .= '<option value="' . $row . '">' . $row . '</option>';
             });
             var source = {
                 datatype: "json",
-                datafields: [{
+                datafields: [
+                    {
                         name: 'TABLE_NAME',
                         type: 'string'
                     },
@@ -49,8 +50,27 @@ $column_data_type_str .= '<option value="' . $row . '">' . $row . '</option>';
                         type: 'string'
                     }
                 ],
-                id: 'TABLE_NAME', // Ensure a unique identifier field
+                addrow: function (rowid, rowdata, position, commit) {
+					commit(true);
+				},
+				deleterow: function (rowid, commit) {
+					commit(true);
+				},
+				updaterow: function (rowid, newdata, commit) {
+					commit(true);
+				},
+
                 url: "{{ route('parameter.grid') }}",
+                cache: false,
+
+                filter: function()
+				{
+					jQuery("#jqxgrid").jqxGrid('updatebounddata', 'filter');
+				},
+				sort: function()
+				{
+					jQuery("#jqxgrid").jqxGrid('updatebounddata', 'sort');
+				},
                 root: 'Rows',
                 beforeprocessing: function(data) {
                     if (data != null && data.length > 0) {
@@ -63,31 +83,36 @@ $column_data_type_str .= '<option value="' . $row . '">' . $row . '</option>';
                     alert(error);
                 }
             });
-            var cellsrenderer = function(row, column, value) {
+
+            var cellsrenderer = function (row, column, value) {
+                return '<div style="text-align: center; margin-top: 10px;">' + value + '</div>';
+            }
+            var columnsrenderer = function (value) {
                 return '<div style="text-align: center; margin-top: 10px;">' + value + '</div>';
             }
             $("#jqxgrid").jqxGrid({
-                width: '99.7%',
+                width:'60.46%',
                 height: "50%",
-                source: dataadapter,
-                filterable: true,
-                sortable: true,
-                pageable: true,
-                rowsheight: 26,
-                enablehover: true,
-                virtualmode: true,
+				source: dataadapter,
+				rowsheight:30,
+				clipboard:false,
+				filterable: true,
+				sortable: true,
+				pageable: true,
+				virtualmode: true,
+				editable: false,
+				rowdetails: false,
                 columnsreorder: true,
                 columnsresize: true,
+				enablebrowserselection: true,
+				selectionmode: 'singlerow',
                 pagesize: 10,
-                editable: false,
-                selectionmode: 'singlerow',
-                clipboard: false,
-                enablebrowserselection: true,
-                pagesizeoptions: ['10', '20', '30', '50'],
+                pagesizeoptions: ['10', '15', '20', '30'],
                 rendergridrows: function(obj) {
                     return obj.data;
                 },
-                columns: [{
+                columns: [
+                    {
                         text: 'D',
                         datafield: 'delete',
                         align: 'center',
@@ -95,62 +120,49 @@ $column_data_type_str .= '<option value="' . $row . '">' . $row . '</option>';
                         sortable: false,
                         menu: false,
                         width: 30,
+                        cellsalign: 'center',
+                        align: 'center',
+                        renderer: columnsrenderer,
                         cellsrenderer: function(row) {
                             editrow = row;
                             var dataRecord = $("#jqxgrid").jqxGrid('getrowdata', editrow);
-                            return '<div style="text-align:center;  cursor:pointer" onclick="delete_table(\'' +
+                            return '<div style="text-align:center;margin-top: 4px; cursor:pointer" onclick="delete_table(\'' +
                                 dataRecord.TABLE_NAME +
                                 '\');" ><img width="20px" align="center" src="{{ url('/') }}/public/assets/action_icon/delete.png"></div>';
                         }
                     },
                     {
-                        text: 'E',
-                        datafield: 'Edit',
-                        align: 'center',
-                        editable: false,
-                        sortable: false,
-                        menu: false,
-
-                        width: 30,
-                        cellsrenderer: function(row) {
-                            editrow = row;
-                            var dataRecord = $("#jqxgrid").jqxGrid('getrowdata', editrow);
-                            return '<div style="text-align:center;  cursor:pointer" onclick="edit_delete(\'' +
-                                dataRecord.TABLE_NAME +
-                                '\');" ><img width="20px" align="center" src="{{ url('/') }}/public/assets/action_icon/edit.png"></div>';
-                        }
-                    },
-
-                    {
                         text: 'Add Column',
                         align: 'center',
                         editable: false,
                         sortable: false,
-
                         menu: false,
-
                         width: 90,
+                        renderer: columnsrenderer,
+                        cellsalign: 'center',
+                        align: 'center',
                         cellsrenderer: function(row) {
                             editrow = row;
                             var dataRecord = $("#jqxgrid").jqxGrid('getrowdata', editrow);
-                            return '<div style="text-align:center;  cursor:pointer" onclick="add_column(\'' +
+                            return '<div style="text-align:center;margin-top: 4px;cursor:pointer" onclick="add_column(\'' +
                                 dataRecord.TABLE_NAME +
                                 '\');" ><img width="20px" align="center" src="{{ url('/') }}/public/assets/action_icon/vertical.png"></div>';
                         }
                     },
-
                     {
                         text: 'Add Row',
                         align: 'center',
                         editable: false,
                         sortable: false,
                         menu: false,
-
                         width: 80,
+                        renderer: columnsrenderer,
+                        cellsalign: 'center',
+                        align: 'center',
                         cellsrenderer: function(row) {
                             editrow = row;
                             var dataRecord = $("#jqxgrid").jqxGrid('getrowdata', editrow);
-                            return '<div style="text-align:center;  cursor:pointer" onclick="add_row(\'' +
+                            return '<div style="text-align:center;margin-top: 4px; cursor:pointer" onclick="add_row(\'' +
                                 dataRecord.TABLE_NAME +
                                 '\');" ><img width="20px" align="center" src="{{ url('/') }}/public/assets/action_icon/database.png"></div>';
                         }
@@ -160,63 +172,81 @@ $column_data_type_str .= '<option value="' . $row . '">' . $row . '</option>';
                         text: 'Table Name',
                         datafield: 'TABLE_NAME',
                         editable: false,
+                        renderer: columnsrenderer,
                         width: 300,
-                        cellsalign: 'left'
+                        cellsalign: 'left',
+                        filterable: true,
                     },
                     {
                         text: 'Engine',
                         datafield: 'ENGINE',
                         editable: false,
-                        width: 300
+                        width: 100,
+                        cellsalign: 'center',
+                        align: 'center',
+                        menu: false,
+
+
                     },
                     {
                         text: 'Table Column',
                         datafield: 'column_count',
                         editable: false,
                         width: 100,
-                        cellsalign: 'left'
+                        cellsalign: 'center',
+                        align: 'center',
+                        menu: false,
                     },
                     {
                         text: 'Table Rows',
                         datafield: 'TABLE_ROWS',
                         editable: false,
                         width: 100,
-                        cellsalign: 'left'
+                        cellsalign: 'center',
+                        align: 'center',
+                        menu: false,
                     },
                     {
-                        text: 'Create Time',
+                        text: 'Entry Date',
                         datafield: 'CREATE_DATE_TIME',
                         editable: false,
-                        width: 100,
+                        width: 150,
                         menu: false
                     },
                 ]
             });
+
             $('#jqxTabs').jqxTabs({
                 width: '100%',
             });
+
             $('#jqxTabs').bind('selected', function(event) {
-                if (event.args.item == 0) {}
+                if (event.args.item == 0) {
+
+                    clear_form();
+
+                }
                 if (event.args.item == 1) {
                     clear_form();
                     $('#table_name_form').jqxValidator('hide');
                     $("#jqxgrid").jqxGrid('updatebounddata');
                 }
             });
+
             $('#jqxTabs').jqxTabs('select', 1);
+
             $("#table_name").on('blur change click focus mouseenter mouseleave keydown keyup keypress', function() {
                 var table_name = $("#table_name").val();
-                // table_name = table_name.replace(/\s+/g, '_').replace(/[^a-zA-Z_]/g, '').toLowerCase();
-                table_name = table_name.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_]/g, '').toLowerCase();
-                table_name = "ref_" + table_name;
                 $("#dynamic_table_push").html(table_name);
-                $("#table_name_hidden").val(table_name);
             });
+
+
+
             $('#table_name_form').jqxValidator({
                 hintType: 'label',
                 rules: [{
                         input: '#table_name',
-                        message: 'required!',
+                        message: 'Required',
                         action: 'keyup,blur',
                         rule: 'required'
                     },
@@ -253,7 +283,7 @@ $column_data_type_str .= '<option value="' . $row . '">' . $row . '</option>';
                                 commit(true);
                                 return true
                             } else {
-                                var hiddenValue = $("#table_name_hidden").val();
+                                var table_name = $("#table_name").val();
                                 var dup = 0;
                                 $.ajax({
                                     type: "GET",
@@ -261,7 +291,7 @@ $column_data_type_str .= '<option value="' . $row . '">' . $row . '</option>';
                                     async: false,
                                     url: "{{ route('parameter.duplicate_check') }}",
                                     data: {
-                                        val: hiddenValue,
+                                        val: table_name,
                                     },
                                     datatype: "json",
                                     error: function(request, error) {
@@ -288,6 +318,8 @@ $column_data_type_str .= '<option value="' . $row . '">' . $row . '</option>';
                     }
                 ]
             });
+
+            
             $("#saveBtn").bind('click', function() {
                 var validationResult = function(isValid) {
                     if (isValid) {
@@ -310,28 +342,8 @@ $column_data_type_str .= '<option value="' . $row . '">' . $row . '</option>';
                 }
                 $('#table_name_form').jqxValidator('validate', validationResult);
             });
-            $("#updateBtn").bind('click', function() {
-                var validationResult = function(isValid) {
-                    if (isValid) {
-                        Swal.fire({
-                            title: "Do you want to Edit?",
-                            showCancelButton: true,
-                            confirmButtonText: "Save",
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                call_ajax_submit();
-                                Swal.fire("Edit!", "", "success");
-                                $("#jqxgrid").jqxGrid('clearselection');
-                                $("#jqxgrid").jqxGrid('updatebounddata');
-                                $('#jqxTabs').jqxTabs('select', 1);
-                            } else if (result.isDenied) {
-                                Swal.fire("Changes are not saved", "", "info");
-                            }
-                        });
-                    }
-                }
-                $('#table_name_form').jqxValidator('validate', validationResult);
-            });
+
+
             $("#add_column_window").jqxWindow({
                 height: 700,
                 width: 1200,
@@ -340,7 +352,6 @@ $column_data_type_str .= '<option value="' . $row . '">' . $row . '</option>';
                 autoOpen: false,
                 cancelButton: $('#cancelButton')
             });
-
             $('#attributes_form').jqxValidator({
                 hintType: 'label',
                 rules: dynamicValidator
@@ -369,13 +380,9 @@ $column_data_type_str .= '<option value="' . $row . '">' . $row . '</option>';
 
 
         }
-
-
         function add_column(name) {
 
-            $('#table_name_att').val(name);
             $('#table_tuple_attributes').empty();
-
             $("#historyheaderTitle").html("Table Name: " + name);
             $("#add_column_window").jqxWindow('open');
             $.ajax({
@@ -492,7 +499,7 @@ $column_data_type_str .= '<option value="' . $row . '">' . $row . '</option>';
                     var json = $.parseJSON(response);
                     $("#table_name").val(json.data.TABLE_COMMENT);
                     $("#action_status").val('edit');
-                    $("#hidden_old_table_name").val(json.data.TABLE_NAME);
+             
                 },
                 error: function(request, error) {
                     console.log("Server Error");
@@ -537,8 +544,11 @@ $column_data_type_str .= '<option value="' . $row . '">' . $row . '</option>';
             });
         }
         function delete_action(name) {
-            var csrfToken = $('meta[name="csrf-token"]').attr('content');
-            $.ajax({
+        
+            let url = "{{url('parameter/delete')}}/"+name;
+            var csrfToken = jQuery('meta[name="csrf-token"]').attr('content');
+
+            jQuery.ajax({
                 cache: false,
                 async: false,
                 contentType: false,
@@ -546,16 +556,24 @@ $column_data_type_str .= '<option value="' . $row . '">' . $row . '</option>';
                 headers: {
                     'X-CSRF-TOKEN': csrfToken
                 },
-                method: "POST",
+                method: "GET",
                 datatype: "json",
-                url: "{{ route('parameter.delete') }}",
-                data: {
-                    val: name,
-                },
+                url: url,
                 success: function(res) {
-                    $('meta[name="csrf-token"]').attr('content', res.csrf_token);
+                    
+                },
+                error: function(error){
+
                 }
             });
+
+
+
+
+            
+
+
+   
 
         }
         function tab_change() {
@@ -563,10 +581,9 @@ $column_data_type_str .= '<option value="' . $row . '">' . $row . '</option>';
         }
         function clear_form() {
             $("#table_name").val('');
-            $("#table_name_att").val('');
             $("#action_status").val('add');
-            $('#updateBtn').hide();
             $('#saveBtn').show();
+            $('#dynamic_table_push').empty();
         }
         function validation_with_looping() {
             var table_attributes_length_count = $("#table_attributes_length_count").val();
@@ -601,10 +618,6 @@ $column_data_type_str .= '<option value="' . $row . '">' . $row . '</option>';
             <div class="content">
                 <form id="table_name_form">
                     <input type="hidden" name="action_status" id="action_status" value="add">
-
-                    <input type="hidden" name="hidden_old_table_name" id="hidden_old_table_name">
-
-
                     <div class="card">
                         <div class="card-body add-product pb-0">
                             <div class="accordion-card-one accordion" id="accordionExample">
@@ -616,17 +629,15 @@ $column_data_type_str .= '<option value="' . $row . '">' . $row . '</option>';
                                                     <label class="form-label">Table Name</label>
                                                     <input type="text" class="form-control" id="table_name"
                                                         name="table_name" maxlength="81">
-                                                    <input type="hidden" name="table_name_hidden"
-                                                        id="table_name_hidden">
                                                 </div>
                                             </div>
                                             <div class="col-lg-8 col-sm-8 col-12">
-                                                <div class="mb-3 add-product">
-                                                    <h1 class="form-h1">Table Name : </h1>
-                                                    <i>
-                                                        <h2 id="dynamic_table_push"></h2>
-                                                    </i>
-                                                </div>
+                                                <table>
+                                                    <tr>
+                                                        <td>Table Name : <i><span id="dynamic_table_push"></span></i>
+                                                        </td>
+                                                    </tr>
+                                                </table>
                                             </div>
                                         </div>
                                     </div>
@@ -637,8 +648,6 @@ $column_data_type_str .= '<option value="' . $row . '">' . $row . '</option>';
                     </div>
                     <div class="mb-5">
                         <button type="button" class="btn btn-primary" id="saveBtn">Save</button>
-                        <button style="display: none" type="button" class="btn btn-primary"
-                            id="updateBtn">Update</button>
                     </div>
                 </form>
 
@@ -646,10 +655,9 @@ $column_data_type_str .= '<option value="' . $row . '">' . $row . '</option>';
         </div>
     </div>
     <div style="overflow: hidden;">
-        <div class="">
-            <h3>Search Area</h3>
+        <div style="margin: 20px">
+            <div id="jqxgrid"></div>
         </div>
-        <div id="jqxgrid"></div>
     </div>
 </div>
 
@@ -667,7 +675,6 @@ $column_data_type_str .= '<option value="' . $row . '">' . $row . '</option>';
                 <form action="#" id="attributes_form" name="attributes_form">
 
 
-                    <input type="hidden" name="table_name_att" id="table_name_att" value="11">
 
 
                     <div class="table-responsive">

@@ -24,7 +24,8 @@
     <link rel="stylesheet" href="{{ asset('public/assets_jqx/jqwidgets/styles/jqx.fresh.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ asset('public/assets_jqx/jqwidgets/styles/jqx.light.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ asset('public/assets_jqx/jqwidgets/styles/jqx.ui-sunny.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('public/assets_jqx/jqwidgets/styles/jqx.energyblue.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('public/assets_jqx/jqwidgets/styles/jqx.energyblue.css') }}"
+        type="text/css" />
     <link rel="stylesheet" href="{{ asset('public/assets_jqx/jqwidgets/styles/jqx.darkblue.css') }}" type="text/css" />
     <script src="{{ asset('public/assets/js/jquery-3.7.1.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('public/assets_jqx/jqwidgets/jqxcore.js') }}"></script>
@@ -269,9 +270,10 @@
                                 <img src="{{ Avatar::create(session('user_name'))->toBase64(); }}">
 
                                 {{-- if set user --}}
-                                {{-- <img src="{{ Avatar::create(session('user_name'))->toBase64(); }}" class="img-fluid" alt="" srcset=""> --}}
+                                {{-- <img src="{{ Avatar::create(session('user_name'))->toBase64(); }}"
+                                    class="img-fluid" alt="" srcset=""> --}}
 
-                              
+
                             </span>
                             <span class="user-detail">
                                 <span class="user-name">{{ session('user_name') }}</span>
@@ -295,7 +297,8 @@
                                 </div>
                             </div>
                             <hr class="m-0">
-                            <a class="dropdown-item" href="{{ route('profile.view') }}"> <i class="me-2" data-feather="user"></i>My Profile</a>
+                            <a class="dropdown-item" href="{{ route('profile.view') }}"> <i class="me-2"
+                                    data-feather="user"></i>My Profile</a>
                             <a class="dropdown-item" href="general-settings.html"><i class="me-2"
                                     data-feather="settings"></i>Settings</a>
                             <hr class="m-0">
@@ -334,59 +337,85 @@
                         <li class="submenu-open">
                             <h6 class="submenu-hdr">Inventory</h6>
                             <ul>
-                                <li class="{{ isActiveRoute('product.view') }}"><a href="{{ route('product.view') }}"><i data-feather="box"></i><span>Products</span></a></li>
-                                <li class="{{ isActiveRoute('add_product.view') }}"><a href=""><i data-feather="plus-square"></i><span>Create Product</span></a></li>
-                                <li class="{{ isActiveRoute('expired_products.view') }}"><a href=""><i data-feather="codesandbox"></i><span>Expired Products</span></a></li>
-                                <li class="{{ isActiveRoute('low_stocks.view') }}"><a href=""><i data-feather="trending-down"></i><span>Low Stocks</span></a></li>
-                                <li class="{{ isActiveRoute('category.view') }}"><a href="{{ route('category.view') }}"><i data-feather="codepen"></i><span>Category</span></a></li>
-                                <li class="{{ isActiveRoute('sub_categories.view') }}"><a href=""><i data-feather="speaker"></i><span>Sub Category</span></a></li>
-                                <li class="{{ isActiveRoute('brand.view') }}"><a href=""><i data-feather="tag"></i><span>Brands</span></a></li>
-                                <li class="{{ isActiveRoute('units.view') }}"><a href=""><i data-feather="speaker"></i><span>Units</span></a></li>
-                                <li class="{{ isActiveRoute('varriant_attributes.view') }}"><a href=""><i data-feather="layers"></i><span>Variant Attributes</span></a></li>
-                                <li class="{{ isActiveRoute('warranty.view') }}"><a href=""><i data-feather="bookmark"></i><span>Warranties</span></a></li>
-                                <li class="{{ isActiveRoute('barcode.view') }}"><a href=""><i data-feather="align-justify"></i><span>Print Barcode</span></a></li>
-                                <li class="{{ isActiveRoute('qrcode.view') }}"><a href=""><i data-feather="maximize"></i><span>Print QR Code</span></a></li>
+                                <li class="{{ isActiveRoute('product.view') }}"><a href="{{ route('product.view') }}"><i
+                                            data-feather="box"></i><span>Products</span></a></li>
+                                <li class="{{ isActiveRoute('expired_products.view') }}"><a href=""><i
+                                            data-feather="codesandbox"></i><span>Expired Products</span></a></li>
+                                <li class="{{ isActiveRoute('low_stocks.view') }}"><a href=""><i
+                                            data-feather="trending-down"></i><span>Low Stocks</span></a></li>
+                                <li class="{{ isActiveRoute('category.view') }}"><a
+                                        href="{{ route('category.view') }}"><i
+                                            data-feather="codepen"></i><span>Category</span></a></li>
+                                <li class="{{ isActiveRoute('sub_categories.view') }}"><a href=""><i
+                                            data-feather="speaker"></i><span>Sub Category</span></a></li>
+                                <li class="{{ isActiveRoute('brand.view') }}"><a href=""><i
+                                            data-feather="tag"></i><span>Brands</span></a></li>
+                                <li class="{{ isActiveRoute('units.view') }}"><a href=""><i
+                                            data-feather="speaker"></i><span>Units</span></a></li>
+                                <li class="{{ isActiveRoute('varriant_attributes.view') }}"><a href=""><i
+                                            data-feather="layers"></i><span>Variant Attributes</span></a></li>
+                                <li class="{{ isActiveRoute('warranty.view') }}"><a href=""><i
+                                            data-feather="bookmark"></i><span>Warranties</span></a></li>
+                                <li class="{{ isActiveRoute('barcode.view') }}"><a href=""><i
+                                            data-feather="align-justify"></i><span>Print Barcode</span></a></li>
+                                <li class="{{ isActiveRoute('qrcode.view') }}"><a href=""><i
+                                            data-feather="maximize"></i><span>Print QR Code</span></a></li>
                             </ul>
                         </li>
                         <li class="submenu-open">
                             <h6 class="submenu-hdr">Stock</h6>
                             <ul>
-                                <li class="{{ isActiveRoute('manage_stocks.view') }}"><a href=""><i data-feather="package"></i><span>Manage Stock</span></a></li>
-                                <li class="{{ isActiveRoute('stock_adjustment.view') }}"><a href=""><i data-feather="clipboard"></i><span>Stock Adjustment</span></a></li>
-                                <li class="{{ isActiveRoute('stock_transfer.view') }}"><a href=""><i data-feather="truck"></i><span>Stock Transfer</span></a></li>
+                                <li class="{{ isActiveRoute('manage_stocks.view') }}"><a href=""><i
+                                            data-feather="package"></i><span>Manage Stock</span></a></li>
+                                <li class="{{ isActiveRoute('stock_adjustment.view') }}"><a href=""><i
+                                            data-feather="clipboard"></i><span>Stock Adjustment</span></a></li>
+                                <li class="{{ isActiveRoute('stock_transfer.view') }}"><a href=""><i
+                                            data-feather="truck"></i><span>Stock Transfer</span></a></li>
                             </ul>
                         </li>
                         <li class="submenu-open">
                             <h6 class="submenu-hdr">Sales</h6>
                             <ul>
-                                <li class="{{ isActiveRoute('sales_list.view') }}"><a href=""><i data-feather="shopping-cart"></i><span>Sales</span></a></li>
-                                <li class="{{ isActiveRoute('invoice_report.view') }}"><a href=""><i data-feather="file-text"></i><span>Invoices</span></a></li>
-                                <li class="{{ isActiveRoute('sales_returns.view') }}"><a href=""><i data-feather="copy"></i><span>Sales Return</span></a></li>
-                                <li class="{{ isActiveRoute('quotation_list.view') }}"><a href=""><i data-feather="save"></i><span>Quotation</span></a></li>
+                                <li class="{{ isActiveRoute('sales_list.view') }}"><a href=""><i
+                                            data-feather="shopping-cart"></i><span>Sales</span></a></li>
+                                <li class="{{ isActiveRoute('invoice_report.view') }}"><a href=""><i
+                                            data-feather="file-text"></i><span>Invoices</span></a></li>
+                                <li class="{{ isActiveRoute('sales_returns.view') }}"><a href=""><i
+                                            data-feather="copy"></i><span>Sales Return</span></a></li>
+                                <li class="{{ isActiveRoute('quotation_list.view') }}"><a href=""><i
+                                            data-feather="save"></i><span>Quotation</span></a></li>
                             </ul>
                         </li>
                         <li class="submenu-open">
                             <h6 class="submenu-hdr">Promo</h6>
                             <ul>
-                                <li class="{{ isActiveRoute('coupons.view') }}"><a href=""><i data-feather="shopping-cart"></i><span>Coupons</span></a></li>
+                                <li class="{{ isActiveRoute('coupons.view') }}"><a href=""><i
+                                            data-feather="shopping-cart"></i><span>Coupons</span></a></li>
                             </ul>
                         </li>
                         <li class="submenu-open">
                             <h6 class="submenu-hdr">Purchases</h6>
                             <ul>
-                                <li class="{{ isActiveRoute('purchase_list.view') }}"><a href=""><i data-feather="shopping-bag"></i><span>Purchases</span></a></li>
-                                <li class="{{ isActiveRoute('purchase_order_report.view') }}"><a href=""><i data-feather="file-minus"></i><span>Purchase Order</span></a></li>
-                                <li class="{{ isActiveRoute('purchase_returns.view') }}"><a href=""><i data-feather="refresh-cw"></i><span>Purchase Return</span></a></li>
+                                <li class="{{ isActiveRoute('purchase_list.view') }}"><a href=""><i
+                                            data-feather="shopping-bag"></i><span>Purchases</span></a></li>
+                                <li class="{{ isActiveRoute('purchase_order_report.view') }}"><a href=""><i
+                                            data-feather="file-minus"></i><span>Purchase Order</span></a></li>
+                                <li class="{{ isActiveRoute('purchase_returns.view') }}"><a href=""><i
+                                            data-feather="refresh-cw"></i><span>Purchase Return</span></a></li>
                             </ul>
                         </li>
                         <li class="submenu-open">
                             <h6 class="submenu-hdr">Finance & Accounts</h6>
                             <ul>
                                 <li class="submenu">
-                                    <a class="{{ isActiveRoute('expense_list.view') }} {{ isActiveRoute('expense_category.view') }}" href=""><i data-feather="file-text"></i><span>Expenses</span><span class="menu-arrow"></span></a>
+                                    <a class="{{ isActiveRoute('expense_list.view') }} {{ isActiveRoute('expense_category.view') }}"
+                                        href=""><i data-feather="file-text"></i><span>Expenses</span><span
+                                            class="menu-arrow"></span></a>
                                     <ul>
-                                        <li class="{{ isActiveRoute('expense_list.view') }}"><a href="">Expenses</a></li>
-                                        <li class="{{ isActiveRoute('expense_category.view') }}"><a href="">Expense Category</a></li>
+                                        <li class="{{ isActiveRoute('expense_list.view') }}"><a href="">Expenses</a>
+                                        </li>
+                                        <li class="{{ isActiveRoute('expense_category.view') }}"><a href="">Expense
+                                                Category</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -394,40 +423,63 @@
                         <li class="submenu-open">
                             <h6 class="submenu-hdr">Peoples</h6>
                             <ul>
-                                <li class="{{ isActiveRoute('customers.view') }}"><a href=""><i data-feather="user"></i><span>Customers</span></a></li>
-                                <li class="{{ isActiveRoute('suppliers.view') }}"><a href=""><i data-feather="users"></i><span>Suppliers</span></a></li>
-                                <li class="{{ isActiveRoute('store_list.view') }}"><a href=""><i data-feather="home"></i><span>Stores</span></a></li>
-                                <li class="{{ isActiveRoute('warehouse.view') }}"><a href=""><i data-feather="archive"></i><span>Warehouses</span></a></li>
+                                <li class="{{ isActiveRoute('customers.view') }}"><a href=""><i
+                                            data-feather="user"></i><span>Customers</span></a></li>
+                                <li class="{{ isActiveRoute('suppliers.view') }}"><a href=""><i
+                                            data-feather="users"></i><span>Suppliers</span></a></li>
+                                <li class="{{ isActiveRoute('store_list.view') }}"><a href=""><i
+                                            data-feather="home"></i><span>Stores</span></a></li>
+                                <li class="{{ isActiveRoute('warehouse.view') }}"><a href=""><i
+                                            data-feather="archive"></i><span>Warehouses</span></a></li>
                             </ul>
                         </li>
                         <li class="submenu-open">
                             <h6 class="submenu-hdr">HRM</h6>
                             <ul>
-                                <li class="{{ isActiveRoute('employees_grid.view') }}"><a href=""><i data-feather="user"></i><span>Employees</span></a></li>
-                                <li class="{{ isActiveRoute('department_grid.view') }}"><a href=""><idata-feather="users"></i><span>Departments</span></a></li>
-                                <li class="{{ isActiveRoute('designation.view') }}"><a href=""><idata-feather="git-merge"></i><span>Designation</span></a></li>
-                                <li class="{{ isActiveRoute('shift.view') }}"><a href=""><i data-feather="shuffle"></i><span>Shifts</span></a></li>
+                                <li class="{{ isActiveRoute('employees_grid.view') }}"><a href=""><i
+                                            data-feather="user"></i><span>Employees</span></a></li>
+                                <li class="{{ isActiveRoute('department_grid.view') }}"><a href="">
+                                        <idata-feather="users"></i><span>Departments</span>
+                                    </a></li>
+                                <li class="{{ isActiveRoute('designation.view') }}"><a href="">
+                                        <idata-feather="git-merge"></i><span>Designation</span>
+                                    </a></li>
+                                <li class="{{ isActiveRoute('shift.view') }}"><a href=""><i
+                                            data-feather="shuffle"></i><span>Shifts</span></a></li>
                                 <li class="submenu">
-                                    <a class="{{ isActiveRoute('attendance_employee.view') }} {{ isActiveRoute('attendance_admin.view') }}" href=""><i data-feather="book-open"></i><span>Attendence</span><span class="menu-arrow"></span></a>
+                                    <a class="{{ isActiveRoute('attendance_employee.view') }} {{ isActiveRoute('attendance_admin.view') }}"
+                                        href=""><i data-feather="book-open"></i><span>Attendence</span><span
+                                            class="menu-arrow"></span></a>
                                     <ul>
-                                        <li class="{{ isActiveRoute('attendance_employee.view') }}"><a href="attendance-employee.html">Employee</a></li>
-                                        <li class="{{ isActiveRoute('attendance_admin.view') }}"><a href="attendance-admin.html">Admin</a></li>
+                                        <li class="{{ isActiveRoute('attendance_employee.view') }}"><a
+                                                href="attendance-employee.html">Employee</a></li>
+                                        <li class="{{ isActiveRoute('attendance_admin.view') }}"><a
+                                                href="attendance-admin.html">Admin</a></li>
                                     </ul>
                                 </li>
                                 <li class="submenu">
-                                    <a href="javascript:void(0);"><i data-feather="calendar"></i><span>Leaves</span><span class="menu-arrow"></span></a>
+                                    <a href="javascript:void(0);"><i
+                                            data-feather="calendar"></i><span>Leaves</span><span
+                                            class="menu-arrow"></span></a>
                                     <ul>
-                                        <li class="{{ isActiveRoute('leaves_admin.view') }}"><a href="">Admin Leaves</a></li>
-                                        <li class="{{ isActiveRoute('leaves_employee.view') }}"><a href="">Employee Leaves</a></li>
-                                        <li class="{{ isActiveRoute('leave_types.view') }}"><a href="">Leave Types</a></li>
+                                        <li class="{{ isActiveRoute('leaves_admin.view') }}"><a href="">Admin Leaves</a>
+                                        </li>
+                                        <li class="{{ isActiveRoute('leaves_employee.view') }}"><a href="">Employee
+                                                Leaves</a></li>
+                                        <li class="{{ isActiveRoute('leave_types.view') }}"><a href="">Leave Types</a>
+                                        </li>
                                     </ul>
                                 </li>
-                                <li><a class="{{ isActiveRoute('holidays.view') }}" href=""><i data-feather="credit-card"></i><span>Holidays</span></a>
+                                <li><a class="{{ isActiveRoute('holidays.view') }}" href=""><i
+                                            data-feather="credit-card"></i><span>Holidays</span></a>
                                 </li>
                                 <li class="submenu">
-                                    <a href="payroll-list.html"><i data-feather="dollar-sign"></i><span>Payroll</span><span class="menu-arrow"></span></a>
+                                    <a href="payroll-list.html"><i
+                                            data-feather="dollar-sign"></i><span>Payroll</span><span
+                                            class="menu-arrow"></span></a>
                                     <ul>
-                                        <li class="{{ isActiveRoute('payroll_list.view') }}"><a href="">Employee Salary</a></li>
+                                        <li class="{{ isActiveRoute('payroll_list.view') }}"><a href="">Employee
+                                                Salary</a></li>
                                         <li class="{{ isActiveRoute('payslip.view') }}"><a href="">Payslip</a></li>
                                     </ul>
                                 </li>
@@ -538,12 +590,13 @@
                                 </li>
                             </ul>
                         </li>
-                   
+
 
                         <li class="submenu-open">
                             <h6 class="submenu-hdr">Parameter Setup</h6>
                             <ul>
-                                <li><a href="{{ route('parameter.view') }}"><i
+                                <li class="{{ isActiveRoute('parameter.view') }}"><a
+                                        href="{{ route('parameter.view') }}"><i
                                             data-feather="file-text"></i><span>Parameter</span></a></li>
                             </ul>
                         </li>
@@ -1504,7 +1557,6 @@
             </div>
         </div>
     </div>
-
     <script src="{{ asset('public/assets/js/feather.min.js') }}"></script>
     <script src="{{ asset('public/assets/js/jquery.slimscroll.min.js') }}"></script>
     <script src="{{ asset('public/assets/js/bootstrap.bundle.min.js') }}"></script>
@@ -1516,5 +1568,28 @@
     <script src="{{ asset('public/assets/js/sweetalert2.all.min.js') }}"></script>
     <script src="{{ asset('public/assets/js/sweetalerts.min.js') }}"></script>
     <script src="{{ asset('public/assets/js/script.js') }}"></script>
+
+    <script>
+        setInterval(() => {
+            check_activity();
+        }, 3000);
+
+        function check_activity(){
+            jQuery.ajax({
+				type: 'GET',
+				cache: false,
+				url: "{{ route('user.check_activity')}}",
+				dataType: 'json',
+				async: false,
+				success: function (response) {
+                    console.log(response);
+                    if(response==0){
+                        window.location="{{ route('user.logout') }}";
+                    }
+                }
+			});
+        }
+    </script>
+
 </body>
 </html>

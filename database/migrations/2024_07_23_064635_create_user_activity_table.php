@@ -11,19 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('warranties', function (Blueprint $table) {
+        Schema::create('user_activity', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('description');
-            $table->integer('duration');
+            $table->string('action_name')->nullable();
+            $table->string('table_name')->nullable();
+            $table->integer('table_row_id')->nullable();
+            $table->text('remarks')->nullable();
+            $table->string('ip_address',50)->nullable();
             $table->integer('e_by')->nullable()->comment("e=entry");
             $table->date('e_at')->nullable()->comment("e=entry");
-            $table->integer('u_by')->nullable()->comment("u=update");
-            $table->date('u_at')->nullable()->comment("u=update");
-            $table->integer('d_by')->nullable()->comment("d=Delete");
-            $table->date('d_at')->nullable()->comment("d=Delete");
             $table->tinyInteger('status')->default(1)->comment("1=Active");
-            $table->timestamps();
         });
     }
 
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('warranties');
+        Schema::dropIfExists('user_activity');
     }
 };

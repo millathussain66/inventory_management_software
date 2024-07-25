@@ -10,6 +10,13 @@
     <link rel="stylesheet" href="{{ asset('public/assets/css/fontawesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('public/assets/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('public/assets/css/style.css') }}">
+    <style>
+        .error {
+            color: red;
+            font-size: 0.875em;
+            margin-top: 0.25em;
+        }
+    </style>
 
 </head>
 
@@ -29,26 +36,50 @@
                                 <img src="{{ asset('public/assets/img/logo-white.png') }}" alt>
                             </a>
                         </div>
-                        <form action="" method="POST">
+                        <form action="{{ route('user.login') }}" method="POST">
                             @csrf
                             <div class="login-userset">
                                 <div class="login-userheading">
                                     <h3>Sign In</h3>
                                     <h4>Access the Dreamspos panel using your email and passcode.</h4>
+
+                                    @if (session('exist_login'))
+                                        <div class="error">{{ session('exist_login') }}</div>
+                                    @endif
+
+
                                 </div>
+
                                 <div class="form-login">
-                                    <label class="form-label">Email Address</label>
+                                    <label class="form-label">User Name / Email Address</label>
                                     <div class="form-addons">
-                                        <input type="text" class="form-control">
+                                        <input type="text" value="{{ old('user_name') }}" class="form-control" id="user_name" name="user_name">
                                         <img src="{{ asset('public/assets/img/icons/mail.svg') }}" alt="img">
                                     </div>
+                                    @if ($errors->has('user_name'))
+                                     <div class="error">{{ $errors->first('user_name') }}</div>
+                                    @endif
+                                    @if (session('user_name'))
+                                        <div class="error">{{ session('user_name') }}</div>
+                                    @endif
+
+
+                            
+
                                 </div>
                                 <div class="form-login">
                                     <label>Password</label>
                                     <div class="pass-group">
-                                        <input type="password" class="pass-input">
+                                        <input type="password" value="{{ old('password') }}" class="pass-input" id="password" name="password">
                                         <span class="fas toggle-password fa-eye-slash"></span>
                                     </div>
+                                    @if ($errors->has('password'))
+                                    <div class="error">{{ $errors->first('password') }}</div>
+                                    @endif
+                                    @if (session('password'))
+                                        <div class="error">{{ session('password') }}</div>
+                                    @endif
+
                                 </div>
                                 <div class="form-login authentication-check">
                                     <div class="row">

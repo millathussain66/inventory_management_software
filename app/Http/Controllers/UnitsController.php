@@ -5,9 +5,36 @@ namespace App\Http\Controllers;
 use App\Models\Units;
 use App\Http\Requests\StoreUnitsRequest;
 use App\Http\Requests\UpdateUnitsRequest;
+use Illuminate\Validation\Rule;
+use App\Models\CommonModel;
+// Common Use
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Session;
+use Config;
+use Cookie;
+use URL;
+use File;
+use Symfony\Component\Console\Input\Input;
 
 class UnitsController extends Controller
 {
+    protected $CommonModel;
+    protected $Units;
+    public function __construct()
+    {
+        $this->CommonModel = new CommonModel();
+        $this->Units = new Units();
+    }
     /**
      * Display a listing of the resource.
      */

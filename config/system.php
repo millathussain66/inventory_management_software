@@ -37,45 +37,23 @@ return [
       33 => 'multilinestring',
       34 => 'multipolygon',
       35 => 'geometrycollection'
-   ]
+   ],
+   'store' => [
+      1 => 'Thomas',
+      2 => 'Rasmussen',
+      3 => 'Fred john',
+   ],
+   'warehouse' => [
+      1 => 'Legendary',
+      2 => 'Determined',
+      3 => 'Sincere',
+   ],
+   'warehouse' => [
+      1 => 'Legendary',
+      2 => 'Determined',
+      3 => 'Sincere',
+   ],
 
-   //    $column_data_type = [
-   //     1 => 'Varchar',
-   //     2 => 'Char',
-   //     3 => 'Text',
-   //     4 => 'TinyText',
-   //     5 => 'MediumText',
-   //     6 => 'LongText',
-   //     7 => 'Blob',
-   //     8 => 'TinyBlob',
-   //     9 => 'MediumBlob',
-   //     10 => 'LongBlob',
-   //     11 => 'Int',
-   //     12 => 'SmallInt',
-   //     13 => 'MediumInt',
-   //     14 => 'BigInt',
-   //     15 => 'TinyInt',
-   //     16 => 'Float',
-   //     17 => 'Double',
-   //     18 => 'Decimal',
-   //     19 => 'Date',
-   //     20 => 'Datetime',
-   //     21 => 'Timestamp',
-   //     22 => 'Time',
-   //     23 => 'Year',
-   //     24 => 'Enum',
-   //     25 => 'Set',
-   //     26 => 'Binary',
-   //     27 => 'Varbinary',
-   //     28 => 'Geometry',
-   //     29 => 'Point',
-   //     30 => 'LineString',
-   //     31 => 'Polygon',
-   //     32 => 'MultiPoint',
-   //     33 => 'MultiLineString',
-   //     34 => 'MultiPolygon',
-   //     35 => 'GeometryCollection'
-   // ];
 
 
 ];

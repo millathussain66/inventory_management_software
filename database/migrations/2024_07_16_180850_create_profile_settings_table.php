@@ -30,9 +30,6 @@ return new class extends Migration
             $table->string('currency_position')->nullable();
             $table->string('decimal_separator')->nullable();
             $table->string('thousand_separator')->nullable();
-            $table->string('thousand_separator')->nullable();
-            $table->string('thousand_separator')->nullable();
-            $table->string('thousand_separator')->nullable();
             $table->string('countries_restriction')->nullable();
             $table->string('allowed_files')->nullable();
             $table->string('max_file_size')->nullable();

@@ -5,15 +5,43 @@ namespace App\Http\Controllers;
 use App\Models\Warranty;
 use App\Http\Requests\StoreWarrantyRequest;
 use App\Http\Requests\UpdateWarrantyRequest;
+use Illuminate\Validation\Rule;
+use App\Models\CommonModel;
+// Common Use
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Session;
+use Config;
+use Cookie;
+use URL;
+use File;
+use Symfony\Component\Console\Input\Input;
 
 class WarrantyController extends Controller
 {
+    protected $CommonModel;
+    protected $Warranty;
+    public function __construct()
+    {
+        $this->CommonModel = new CommonModel();
+        $this->Warranty = new Warranty();
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+
+
     }
 
     /**

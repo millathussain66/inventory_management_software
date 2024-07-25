@@ -14,6 +14,11 @@ Route::middleware(['unauth.user'])->group(function () {
     Route::get('login', function () {
         return view('login_register.login');
     })->name('user.login');
+
+    Route::post('login', [UserController::class, 'login_submit'])->name('user.login');
+
+
+
 });
 
 Route::middleware(['auth.user'])->group(function () {
@@ -21,6 +26,7 @@ Route::middleware(['auth.user'])->group(function () {
         return view('dashboard');
     })->name('dashboard');
     Route::get('logout', [UserController::class, 'log_out'])->name('user.logout');
+    Route::get('check_activity', [UserController::class, 'check_activity'])->name('user.check_activity');
     // Product Start
 
 
@@ -36,6 +42,7 @@ Route::middleware(['auth.user'])->group(function () {
 
     Route::prefix('product')->group(function () {
         Route::get('view', [ProductController::class, 'index'])->name('product.view');
+        Route::post('call_ajax_submit', [ProductController::class, 'call_ajax_submit'])->name('product.call_ajax_submit');
     });
     // Catagory
     Route::prefix('category')->group(function () {

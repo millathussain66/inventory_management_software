@@ -3,20 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Models\ParameterSetup;
-use Illuminate\Http\Request;
-
+use Illuminate\Validation\Rule;
 use App\Models\CommonModel;
-
-
+// Common Use
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
-use Hash;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Session;
 use Config;
 use Cookie;
 use URL;
 use File;
 use Symfony\Component\Console\Input\Input;
+
+
+
 
 class ParameterSetupController extends Controller
 {
@@ -54,6 +63,7 @@ class ParameterSetupController extends Controller
             'TotalRows' => $result['TotalRows'],
             'Rows'      => $result['Rows']
         );
+
         echo json_encode($data);
     }
     public function duplicate_check(Request $request)
@@ -121,9 +131,11 @@ class ParameterSetupController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request)
+    public function destroy($tablename)
     {
-        dd($request);
+        $sql_statemnt = "D";
+
+
     }
     public function get_edit_data(Request $request)
     {

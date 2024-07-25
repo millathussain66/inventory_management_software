@@ -17,13 +17,14 @@ return new class extends Migration
             $table->string('sort_name');
             $table->integer('no_of_products');
             $table->string('img_url');
+            $table->integer('e_by')->nullable()->comment("e=entry");
+            $table->date('e_at')->nullable()->comment("e=entry");
+            $table->integer('u_by')->nullable()->comment("u=update");
+            $table->date('u_at')->nullable()->comment("u=update");
+            $table->integer('d_by')->nullable()->comment("d=Delete");
+            $table->date('d_at')->nullable()->comment("d=Delete");
             $table->tinyInteger('status')->default(1)->comment("1=Active");
-            $table->integer('created_by');
-            $table->date('created_at');
-            $table->integer('update_by');
-            $table->date('update_at');
-            $table->integer('delete_by');
-            $table->date('delete_at');
+            $table->timestamps();
         });
     }
 

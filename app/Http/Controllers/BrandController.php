@@ -5,9 +5,33 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use App\Http\Requests\StoreBrandRequest;
 use App\Http\Requests\UpdateBrandRequest;
+use Illuminate\Validation\Rule;
+use App\Models\CommonModel;
+
+// Common Use
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
+use Session;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
 
 class BrandController extends Controller
 {
+    protected $CommonModel;
+    protected $Brand;
+    public function __construct()
+    {
+        $this->CommonModel = new CommonModel();
+        $this->Brand = new Brand();
+    }
     /**
      * Display a listing of the resource.
      */
