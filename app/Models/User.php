@@ -21,12 +21,14 @@ use Session;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-
+use Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use function PHPUnit\Framework\isNull;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
     protected $app_session;
     protected static $app_session_static;
     public $timestamps = false;
@@ -85,9 +87,6 @@ class User extends Authenticatable
             'first_name'       => $request->input('first_name'),
             'last_name'        => $request->input('last_name'),
             'phone'            => $request->input('phone'),
-            // 'user_name'        => $request->input('user_name'),
-            // 'email'            => $request->input('email'),
-            // 'password'         => Hash::make($request->input('password')),
             'password'         => Crypt::encryptString($request->input('password')),
             'update_at'       => now(),
             'update_by'       => session('id')

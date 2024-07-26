@@ -1,5 +1,23 @@
 @extends('layouts.master')
 @section('content')
+
+
+
+
+
+
+
+
+@php
+    $category_str = '<option value="">Choose</option>';
+    if (!empty($category)) {
+        foreach ($category as $row) {
+            $category_str .= '<option value="' . $row->id . '">' . $row->name . '</option>';
+        }
+    }
+@endphp
+
+
 <script>
     $(document).ready(function() {
             var source = {
@@ -302,7 +320,7 @@
                 width: '100%',
             });
 
-            $('#jqxTabs').jqxTabs('select', 1);
+            $('#jqxTabs').jqxTabs('select', 0);
 
         });
 
@@ -326,11 +344,6 @@
                         }else{
 
                         }
-
-
-
-
-
                     },
                     error: function(error){
                         alert("Server Error");
@@ -440,9 +453,7 @@
                                                         <label class="form-label" for="store">Store</label>
                                                         <select class="select" id="store" name="store">
                                                             <option>Choose</option>
-                                                            <option>Thomas</option>
-                                                            <option>Rasmussen</option>
-                                                            <option>Fred john</option>
+                                                      
                                                         </select>
                                                     </div>
                                                 </div>
@@ -451,9 +462,7 @@
                                                         <label class="form-label" for="warehouse">Warehouse</label>
                                                         <select class="select" id="warehouse" name="warehouse">
                                                             <option>Choose</option>
-                                                            <option>Legendary</option>
-                                                            <option>Determined</option>
-                                                            <option>Sincere</option>
+                                                          
                                                         </select>
                                                     </div>
                                                 </div>
@@ -499,34 +508,23 @@
                                                                 </a>
                                                             </div>
                                                             <select class="select" id="category" name="category">
-                                                                <option>Choose</option>
-                                                                <option>Lenovo</option>
-                                                                <option>Electronics</option>
+                                                                {!! $category_str !!}
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-sm-6 col-12">
                                                         <div class="mb-3 add-product">
-                                                            <label class="form-label" for="sub-category">Sub
-                                                                Category</label>
-                                                            <select class="select" id="sub-category"
-                                                                name="sub-category">
+                                                            <label class="form-label" for="sub_category">Sub Category</label>
+                                                            <select class="select" id="sub_category" name="sub_category">
                                                                 <option>Choose</option>
-                                                                <option>Lenovo</option>
-                                                                <option>Electronics</option>
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-sm-6 col-12">
                                                         <div class="mb-3 add-product">
-                                                            <label class="form-label" for="sub-sub-category">Sub Sub
-                                                                Category</label>
-                                                            <select class="select" id="sub-sub-category"
-                                                                name="sub-sub-category">
+                                                            <label class="form-label" for="sub_sub_category">Sub Sub Category</label>
+                                                            <select class="select" id="sub_sub_category" name="sub_sub_category">
                                                                 <option>Choose</option>
-                                                                <option>Fruits</option>
-                                                                <option>Computers</option>
-                                                                <option>Shoes</option>
                                                             </select>
                                                         </div>
                                                     </div>

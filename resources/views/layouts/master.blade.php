@@ -514,8 +514,7 @@
                             <h6 class="submenu-hdr">User Management</h6>
                             <ul>
                                 <li><a href="users.html"><i data-feather="user-check"></i><span>Users</span></a></li>
-                                <li><a href="roles-permissions.html"><i data-feather="shield"></i><span>Roles &
-                                            Permissions</span></a></li>
+                                <li class="{{ isActiveRoute('permissions') }}"><a href="{{ url('permissions')}}"><i data-feather="shield"></i><span>Roles & Permissions</span></a></li>
                                 <li><a href="delete-account.html"><i data-feather="lock"></i><span>Delete Account
                                             Request</span></a></li>
                             </ul>
@@ -1570,9 +1569,47 @@
     <script src="{{ asset('public/assets/js/script.js') }}"></script>
 
     <script>
+        $(document).ready(function() {
+            $('#category').change(function() {
+                var categoryId = $(this).val();
+                $.ajax({
+                    url: 'sub_categories/' + categoryId,
+                    type: 'GET',
+                    success: function(data) {
+                        $('#sub_category').empty();
+                        $.each(data, function(index, subCategory) {
+                            $('#sub_category').append('<option value=""> </option>');
+                            $('#sub_category').append('<option value="' + subCategory.id + '">' + subCategory.name + '</option>');
+                        });
+                    }
+                });
+            });
+            $('#sub_category').change(function() {
+                var subCategoryId = $(this).val();
+                $.ajax({
+                    url: 'sub_sub_categories/' + subCategoryId,
+                    type: 'GET',
+                    success: function(data) {
+                        $('#sub_sub_category').empty();
+                        $.each(data, function(index, subSubCategory) {
+                            $('#sub_sub_category').append('<option value="">Choose</option>');
+                            $('#sub_sub_category').append('<option value="' + subSubCategory.id + '">' + subSubCategory.name + '</option>');
+                        });
+                    }
+                });
+            });
+        });
+
+
+
+
+
+
+
+
         setInterval(() => {
             check_activity();
-        }, 3000);
+        }, 10000);
 
         function check_activity(){
             $.ajax({
@@ -1591,4 +1628,5 @@
     </script>
 
 </body>
+
 </html>

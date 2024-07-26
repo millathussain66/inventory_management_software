@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Validation\Rule;
 use App\Models\CommonModel;
+use App\Models\SubCategory;
+use App\Models\SubSubCategory;
+
+
 // Common Use
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
@@ -39,7 +43,12 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('product.grid');
+
+
+        $data = [
+            'category' => CommonModel::parameter_data('categories', 'id', 'status = 1', ['id', 'name']),
+        ];
+        return view('product.grid',$data);
     }
 
     /**
@@ -89,4 +98,17 @@ class ProductController extends Controller
     {
         //
     }
+
+    public function getSubCategories($categoryId)
+    {
+        $subCategories = SubCategory::where('category_id', $categoryId)->get();
+        return response()->json($subCategories);
+    }
+    public function getSubSubCategories($subCategoryId)
+    {
+        $subSubCategories = SubSubCategory::where('sub_category_id', $subCategoryId)->get();
+        return response()->json($subSubCategories);
+    }
+
+
 }

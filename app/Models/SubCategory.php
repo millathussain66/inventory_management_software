@@ -18,10 +18,12 @@ use Session;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-
+use Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 class SubCategory extends Model
 {
-    use HasFactory;
+    use HasFactory,HasRoles;
     protected $app_session;
     protected static $app_session_static;
     protected $table = 'sub_categories';
@@ -32,12 +34,12 @@ class SubCategory extends Model
         "name",
         "code",
         "description",
-        "e_by",
-        "e_at",
-        "u_at",
-        "u_by",
-        "d_by",
-        "d_at",
+        "created_by",
+        "created_at",
+        "update_by",
+        "update_at",
+        "delete_by",
+        "delete_at",
         "status"
      ];
     public function __construct() 

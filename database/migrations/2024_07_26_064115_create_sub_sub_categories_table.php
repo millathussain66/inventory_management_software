@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sub_categories', function (Blueprint $table) {
+        Schema::create('sub_sub_categories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->default(1)->constrained()->onDelete('cascade'); // Example with default value 1
-            $table->string('name')->nullable();
-            $table->string('code')->nullable();
-            $table->text('description')->nullable();
-            $table->string('img_url')->nullable();
+            $table->string('name')->default('Default Name'); // Add default value here
+            $table->foreignId('sub_category_id')->constrained()->onDelete('cascade')->nullable(); 
             $table->integer('created_by')->nullable();
             $table->timestamp('created_at')->nullable(); // Use timestamp for date-time columns
             $table->integer('update_by')->nullable();
@@ -26,7 +23,6 @@ return new class extends Migration
             $table->timestamp('delete_at')->nullable();
             $table->tinyInteger('status')->default(1)->comment("1=Active");
         });
-        
     }
 
     /**
@@ -34,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sub_categories');
+        Schema::dropIfExists('sub_sub_categories');
     }
 };

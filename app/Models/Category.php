@@ -18,22 +18,24 @@ use Session;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-
+use Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 class Category extends Model
 {
-    use HasFactory;
+    use HasFactory,HasRoles;
     public $timestamps = false;
     protected $table = 'categories';
     protected $fillable = [
         "id",
         "name",
         "slug",
-        "e_by",
-        "e_at",
-        "u_at",
-        "u_by",
-        "d_by",
-        "d_at",
+        "created_by",
+        "created_at",
+        "update_by",
+        "update_at",
+        "delete_by",
+        "delete_at",
         "status"
      ];
     // protected $app_session;

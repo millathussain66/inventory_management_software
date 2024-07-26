@@ -8,3 +8,7 @@ git reset --hard origin/master
 ########### For Avater
 composer require laravolt/avatar
 composer dump-autoload
+
+php artisan migrate:fresh
+php artisan migrate:fresh --seed
+php artisan db:seed

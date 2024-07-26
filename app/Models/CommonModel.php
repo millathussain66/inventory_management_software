@@ -4,8 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
-
+use Spatie\Permission\Traits\HasRoles;
 
 // Common Use
 use Illuminate\Support\Facades\Log;
@@ -19,28 +18,29 @@ use Session;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 
 class CommonModel extends Model
 {
-    use HasFactory;
-    protected $app_session;
-    protected static $app_session_static;
+	use HasFactory,HasRoles;
+	protected $app_session;
+	protected static $app_session_static;
 	public $timestamps = false;
-    public function __construct() 
-    {
-        $this->app_session = config('app_session_settings.session_config.app_session');
-    }
-    // session data static function for get from static method 
-    public static function initialize()
-    {
-        self::$app_session_static = config('app_session_settings.session_config.app_session');
-    }
+	public function __construct()
+	{
+		$this->app_session = config('app_session_settings.session_config.app_session');
+	}
+	// session data static function for get from static method 
+	public static function initialize()
+	{
+		self::$app_session_static = config('app_session_settings.session_config.app_session');
+	}
 
 
-    
-	public static function user_activities($action_name,$table_name,$table_row_id,$remarks)
+
+	public static function user_activities($action_name, $table_name, $table_row_id, $remarks)
 	{
 		$ip_address = request()->ip();
 		if ($ip_address == '0.0.0.0') {
@@ -62,9 +62,9 @@ class CommonModel extends Model
 	}
 
 
-    public static function login_history($userid,$login_datetime,$logout_datetime,$status)
+	public static function login_history($userid, $login_datetime, $logout_datetime, $status)
 	{
-        $ip_address = request()->ip();
+		$ip_address = request()->ip();
 		if ($ip_address == '0.0.0.0') {
 			$ip_address = $_SERVER['REMOTE_ADDR'];
 		}
@@ -84,5 +84,19 @@ class CommonModel extends Model
 	}
 
 
+	public static function parameter_data($table, $order, $where, $columns = '*')
+	{
+		$query = DB::table($table)
+			->select($columns)
+			->whereRaw($where);
+		if (is_array($order)) {
+			foreach ($order as $column) {
+				$query->orderBy($column);
+			}
+		} else {
+			$query->orderBy($order);
+		}
+		return $query->get();
 
+	}
 }

@@ -66,4 +66,9 @@ class Controller extends BaseController
         return [$status,$pdfFile,url($url),$orginal_name,$orginal_extension,$orginal_size];
     }
 
+    
+
+
+
+
 }

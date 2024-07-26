@@ -18,10 +18,12 @@ use Session;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-
+use Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 class Units extends Model
 {
-    use HasFactory;
+    use HasFactory,HasRoles;
     protected $app_session;
     protected static $app_session_static;
     public $timestamps = false;
