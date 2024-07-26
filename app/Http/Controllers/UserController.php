@@ -218,17 +218,12 @@ class UserController extends Controller
 
     public function check_activity()
     {
-        // if(session('id')!=null){
-        //     $data = DB::table('users')->select('session_user_have')->where('id', session('id'))->first();
-        //     Log::error($data->session_user_have);
-        //     echo json_encode($data->session_user_have);
-        // }else{
-
-        //     echo json_encode(0);
-        // }
-
-        Log::error(session('id'));
-
+        if(session('registration_success')!=false){
+            $data = DB::table('users')->select('session_user_have')->where('id', session('id'))->first();
+            echo json_encode($data->session_user_have);
+        }else{
+            echo json_encode(0);
+        }
     }
 
 

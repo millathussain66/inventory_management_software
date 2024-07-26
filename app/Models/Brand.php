@@ -21,6 +21,7 @@ class Brand extends Model
 {
     use HasFactory;
     protected $app_session;
+    public $timestamps = false;
     protected static $app_session_static;
     public function __construct() 
     {

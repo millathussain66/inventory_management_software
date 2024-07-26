@@ -16,14 +16,16 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->integer('duration');
-            $table->integer('e_by')->nullable()->comment("e=entry");
-            $table->date('e_at')->nullable()->comment("e=entry");
-            $table->integer('u_by')->nullable()->comment("u=update");
-            $table->date('u_at')->nullable()->comment("u=update");
-            $table->integer('d_by')->nullable()->comment("d=Delete");
-            $table->date('d_at')->nullable()->comment("d=Delete");
+
+            $table->integer('created_by')->nullable();
+            $table->date('created_at')->nullable();
+            $table->integer('update_by')->nullable();
+            $table->date('update_at')->nullable();
+            $table->integer('delete_by')->nullable();
+            $table->date('delete_at')->nullable();
+
+
             $table->tinyInteger('status')->default(1)->comment("1=Active");
-            $table->timestamps();
         });
     }
 

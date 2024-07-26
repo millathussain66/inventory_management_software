@@ -13,20 +13,20 @@ return new class extends Migration
     {
         Schema::create('sub_categories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('categorie_id');
-            $table->string('name');
-            $table->string('code');
-            $table->text('description');
-            $table->string('img_url');
-            $table->integer('e_by')->nullable()->comment("e=entry");
-            $table->date('e_at')->nullable()->comment("e=entry");
-            $table->integer('u_by')->nullable()->comment("u=update");
-            $table->date('u_at')->nullable()->comment("u=update");
-            $table->integer('d_by')->nullable()->comment("d=Delete");
-            $table->date('d_at')->nullable()->comment("d=Delete");
+            $table->foreignId('categorie_id')->default(1)->constrained()->onDelete('cascade'); // Example with default value 1
+            $table->string('name')->nullable();
+            $table->string('code')->nullable();
+            $table->text('description')->nullable();
+            $table->string('img_url')->nullable();
+            $table->integer('created_by')->nullable();
+            $table->timestamp('created_at')->nullable(); // Use timestamp for date-time columns
+            $table->integer('update_by')->nullable();
+            $table->timestamp('update_at')->nullable();
+            $table->integer('delete_by')->nullable();
+            $table->timestamp('delete_at')->nullable();
             $table->tinyInteger('status')->default(1)->comment("1=Active");
-            $table->timestamps();
         });
+        
     }
 
     /**

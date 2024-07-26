@@ -39,12 +39,11 @@ return new class extends Migration
             $table->string('product_type')->nullable()->comment('Singal Or Variable');
             $table->integer('created_by')->nullable();
             $table->date('created_at')->nullable();
-            $table->date('update_by')->nullable();
-            $table->integer('update_at')->nullable();
-            $table->date('delete_by')->nullable();
+            $table->integer('update_by')->nullable();
+            $table->date('update_at')->nullable();
+            $table->integer('delete_by')->nullable();
             $table->date('delete_at')->nullable();
             $table->tinyInteger('status')->default(1)->comment("1=Active");
-            // $table->timestamps();
         });
     }
 

@@ -22,7 +22,7 @@ use Illuminate\Support\Str;
 class Category extends Model
 {
     use HasFactory;
-
+    public $timestamps = false;
     protected $table = 'categories';
     protected $fillable = [
         "id",

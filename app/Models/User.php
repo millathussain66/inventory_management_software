@@ -29,6 +29,7 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
     protected $app_session;
     protected static $app_session_static;
+    public $timestamps = false;
     public function __construct()
     {
         $this->app_session = config('app_session_settings.session_config.app_session');

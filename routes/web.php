@@ -14,32 +14,23 @@ Route::middleware(['unauth.user'])->group(function () {
     Route::get('login', function () {
         return view('login_register.login');
     })->name('user.login');
-
     Route::post('login', [UserController::class, 'login_submit'])->name('user.login');
-
-
-
 });
+
+
+Route::get('check_activity', [UserController::class, 'check_activity'])->name('user.check_activity');
+
 
 Route::middleware(['auth.user'])->group(function () {
     Route::get('/', function () {
         return view('dashboard');
     })->name('dashboard');
     Route::get('logout', [UserController::class, 'log_out'])->name('user.logout');
-    Route::get('check_activity', [UserController::class, 'check_activity'])->name('user.check_activity');
     // Product Start
-
-
-
     Route::prefix('profile')->group(function () {
         Route::get('view', [UserController::class, 'profile'])->name('profile.view');
         Route::post('update', [UserController::class, 'update_profile'])->name('profile.update');
-
-
     });
-
-
-
     Route::prefix('product')->group(function () {
         Route::get('view', [ProductController::class, 'index'])->name('product.view');
         Route::post('call_ajax_submit', [ProductController::class, 'call_ajax_submit'])->name('product.call_ajax_submit');

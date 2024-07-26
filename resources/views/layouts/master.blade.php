@@ -1575,14 +1575,13 @@
         }, 3000);
 
         function check_activity(){
-            jQuery.ajax({
+            $.ajax({
 				type: 'GET',
 				cache: false,
 				url: "{{ route('user.check_activity')}}",
 				dataType: 'json',
 				async: false,
 				success: function (response) {
-                    console.log(response);
                     if(response==0){
                         window.location="{{ route('user.logout') }}";
                     }

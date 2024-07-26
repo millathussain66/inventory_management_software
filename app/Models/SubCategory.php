@@ -25,6 +25,7 @@ class SubCategory extends Model
     protected $app_session;
     protected static $app_session_static;
     protected $table = 'sub_categories';
+    public $timestamps = false;
     protected $fillable = [
         "id",
         "categorie_id",
